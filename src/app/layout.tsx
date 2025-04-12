@@ -36,6 +36,16 @@ export default async function RootLayout({
 
   const locale = await getLocale();
   const messages =await getMessages()
+  const response = await fetch ("https://api.jsonbin.io/v3/b/67faa7d48561e97a50fe2203",{
+    method:"GET",
+    headers:{
+      'Content-Type':'application/json',
+      'X-Master-Key':'$2a$10$u1.DamlS05GPjmeH79.fRu.7E0anrIkl9yNSemrXdkRzWrSi8y9ry'
+    }
+  })
+
+  const data=await response.json()
+
 
   return (
     <html lang={locale}>
@@ -45,7 +55,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
 
        
-       <Theme appearance="light">
+       <Theme appearance={data.record.appearance} accentColor={data.record.accentColor} grayColor={data.record.grayColor} radius={data.record.radius} scaling={data.record.scaling}>
         <Provider>
            {children}
            

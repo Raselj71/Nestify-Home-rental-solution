@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Link, SegmentedControl } from "@radix-ui/themes";
+import { Box, Button, Flex, Link } from "@radix-ui/themes";
 import Image from "next/image";
 import React from "react";
 import nestifyLogo from "../../public/nestify.png";
