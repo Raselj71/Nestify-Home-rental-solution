@@ -197,7 +197,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\User\\Desktop\\Nextjs-internationalization\\src\\generated\\prisma",
+      "value": "C:\\Users\\Rasel\\Desktop\\Nextjs-internationalization\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -211,11 +211,12 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\User\\Desktop\\Nextjs-internationalization\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\Rasel\\Desktop\\Nextjs-internationalization\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": "../../../.env",
+    "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.6.0",
@@ -224,17 +225,16 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://postgres.ekluzdkmkdsvhlculrlk:IbKqjFxuQ8nwbHji@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Users {\n  id    String  @id @default(uuid()) @db.Uuid\n  email String  @unique\n  phone String? @unique\n\n  fullName  String?\n  fcm_token String?\n  avatar    String?\n  property  Property[]\n  role      user_role  @default(USER)\n  createdAt DateTime   @default(now())\n  updateAt  DateTime   @updatedAt()\n}\n\nmodel Property {\n  id         String   @id @default(uuid()) @db.Uuid\n  title      String\n  summary    String?\n  address    Address?\n  userId     String   @db.Uuid // Ensure this matches the `id` field in the `Users` model\n  user       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  images     String[]\n  price      Int\n  basic_info info?\n  createdAt  DateTime @default(now())\n  updateAt   DateTime @updatedAt()\n}\n\nmodel Preference {\n  id          String @id @default(uuid()) @db.Uuid\n  appearance  String\n  accentColor String\n  grayColor   String\n  radius      String\n  scaling     String\n}\n\nenum property_type {\n  FAMILY\n  BACHELOR\n  OFFICE\n  SUBLET\n  HOSTEL\n  SHOP\n}\n\nmodel info {\n  id         String        @id @default(uuid()) @db.Uuid\n  bedroom    Int\n  bathroom   Int\n  area       Int?\n  available  DateTime?\n  floor_no   Int?\n  category   property_type\n  gender     gender\n  propertyId String        @unique @db.Uuid\n  property   Property      @relation(fields: [propertyId], references: [id])\n  createdAt  DateTime      @default(now())\n  updateAt   DateTime      @updatedAt()\n}\n\nmodel Address {\n  id       String  @id @default(uuid()) @db.Uuid\n  division String\n  district String\n  upzila   String\n  map      String?\n\n  propertyId String   @unique @db.Uuid\n  property   Property @relation(fields: [propertyId], references: [id])\n  createdAt  DateTime @default(now())\n  updateAt   DateTime @updatedAt()\n}\n\nenum gender {\n  MALE\n  FEMALE\n}\n\nenum user_role {\n  ADMIN\n  USER\n}\n",
-  "inlineSchemaHash": "bb52354e8b20418aeff80b4ae23651dbdca7c515f135699a356e9b332e69e8d1",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel Users {\n  id    String  @id @default(uuid()) @db.Uuid\n  email String  @unique\n  phone String? @unique\n\n  fullName  String?\n  fcm_token String?\n  avatar    String?\n  property  Property[]\n  role      user_role  @default(USER)\n  createdAt DateTime   @default(now())\n  updateAt  DateTime   @updatedAt()\n}\n\nmodel Property {\n  id         String   @id @default(uuid()) @db.Uuid\n  title      String\n  summary    String?\n  address    Address?\n  userId     String   @db.Uuid // Ensure this matches the `id` field in the `Users` model\n  user       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  images     String[]\n  price      Int\n  basic_info info?\n  createdAt  DateTime @default(now())\n  updateAt   DateTime @updatedAt()\n}\n\nmodel Preference {\n  id          String @id @default(uuid()) @db.Uuid\n  appearance  String\n  accentColor String\n  grayColor   String\n  radius      String\n  scaling     String\n}\n\nenum property_type {\n  FAMILY\n  BACHELOR\n  OFFICE\n  SUBLET\n  HOSTEL\n  SHOP\n}\n\nmodel info {\n  id         String        @id @default(uuid()) @db.Uuid\n  bedroom    Int\n  bathroom   Int\n  area       Int?\n  available  DateTime?\n  floor_no   Int?\n  category   property_type\n  gender     gender\n  propertyId String        @unique @db.Uuid\n  property   Property      @relation(fields: [propertyId], references: [id])\n  createdAt  DateTime      @default(now())\n  updateAt   DateTime      @updatedAt()\n}\n\nmodel Address {\n  id       String  @id @default(uuid()) @db.Uuid\n  division String\n  district String\n  upzila   String\n  map      String?\n\n  propertyId String   @unique @db.Uuid\n  property   Property @relation(fields: [propertyId], references: [id])\n  createdAt  DateTime @default(now())\n  updateAt   DateTime @updatedAt()\n}\n\nenum gender {\n  MALE\n  FEMALE\n}\n\nenum user_role {\n  ADMIN\n  USER\n}\n",
+  "inlineSchemaHash": "e6de0ed827500123e391fe2465bdd16300024f17149483286b5e83b64e735a60",
   "copyEngine": true
 }
 config.dirname = '/'

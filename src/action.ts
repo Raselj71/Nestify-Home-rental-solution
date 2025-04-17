@@ -5,10 +5,10 @@ import { redirect } from "next/navigation"
 
 import { revalidatePath } from "next/cache"
 import { LoginFormSchema, LoginFormState, SignupFormSchema, SingupFormState } from "./utils/zod/AuthSchema"
-import { supabaseServerClient } from "./utils/supabase/ServerClient"
+import {  createClient } from "./utils/supabase/ServerClient"
 
 export const LoginAction=async(state: LoginFormState, formData: FormData)=>{
-   const supabase= await supabaseServerClient()
+   const supabase= await createClient()
     const email=formData.get('email') as string
     const password=formData.get('password') as string
 
@@ -42,7 +42,7 @@ export const LoginAction=async(state: LoginFormState, formData: FormData)=>{
 }
 
 export const SignupAction=async(state: SingupFormState, formData: FormData)=>{
-  const supabase= await supabaseServerClient()
+  const supabase= await createClient()
    const email=formData.get('email') as string
    const password=formData.get('password') as string
    const name= formData.get('name') as string
@@ -68,13 +68,12 @@ export const SignupAction=async(state: SingupFormState, formData: FormData)=>{
       }
      }
 
-        // const user= await prisma.user.create({
-        // data:{
-        //     email,
-        //     name,
-        //     supabaseId:supaUser?.id
-        // }
-        // })
+     const {data,error:insertError}=await supabase.from('Users').insert({fullName: name, email, id: supaUser?.id, role: 'USER', createdAt: new Date().toISOString(), updateAt: new Date().toISOString()}) 
+      if(insertError){
+        return {
+          message:insertError.message
+        }
+      } 
 
     redirect('/auth/login')
 
@@ -84,7 +83,7 @@ export const SignupAction=async(state: SingupFormState, formData: FormData)=>{
 
 export const logout=async()=>{
 
-  const supabase=await supabaseServerClient()
+  const supabase=await createClient()
   const {error}=await supabase.auth.signOut()
   if(error){
     throw new Error(error.message)
