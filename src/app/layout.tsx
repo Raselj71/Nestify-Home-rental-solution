@@ -36,7 +36,6 @@ export default async function RootLayout({
 
   const locale = await getLocale();
   const messages =await getMessages()
- 
 
 
 
@@ -48,7 +47,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
 
        
-       <Theme>
+       <Theme >
         <Provider>
            {children}
            

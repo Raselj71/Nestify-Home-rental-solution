@@ -5,6 +5,7 @@ import nestifyLogo from "../../public/nestify.png";
 import { cn } from "@/utils/cn";
 import { Plus } from "lucide-react";
 import EnController from "./EnController";
+import NavUser from "./NavUser";
 
 function Navbar() {
  
@@ -33,6 +34,8 @@ function Navbar() {
           </Button>
 
            <EnController/>
+
+           <NavUser/>
 
         </Flex>
       </Flex>
