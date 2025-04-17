@@ -1,58 +1,81 @@
 "use client";
 import { useAuth } from "@/hooks/useAuth";
-import { cn } from "@/lib/utils";
-import { Avatar, Button, DropdownMenu } from "@radix-ui/themes";
+
+
 import React from "react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { BadgeCheck, Bell, UserIcon } from "lucide-react";
+
+import LogoutMenu from "./common/LogoutMenu";
+
 
 function NavUser() {
   const { user, loading } = useAuth();
+
+ 
 
   if (!user || loading) return null;
   console.log("user", user);
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger  >
-        
-      <Button variant="ghost" color="mint" radius="full">
-    <Avatar
-      fallback="RA"
-      radius="full"
-      size={{
-        initial: "3",
-        lg: "4",
-      }}
-      src={user?.avatar || ""}
-    />
-  </Button>
-             
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content align="end" size={"2"}>
-        <DropdownMenu.Item shortcut="⌘ E">Edit</DropdownMenu.Item>
-        <DropdownMenu.Item shortcut="⌘ D">Duplicate</DropdownMenu.Item>
-        <DropdownMenu.Separator />
-        <DropdownMenu.Item shortcut="⌘ N">Archive</DropdownMenu.Item>
-
-        <DropdownMenu.Sub>
-          <DropdownMenu.SubTrigger>More</DropdownMenu.SubTrigger>
-          <DropdownMenu.SubContent>
-            <DropdownMenu.Item>Move to project…</DropdownMenu.Item>
-            <DropdownMenu.Item>Move to folder…</DropdownMenu.Item>
-
-            <DropdownMenu.Separator />
-            <DropdownMenu.Item>Advanced options…</DropdownMenu.Item>
-          </DropdownMenu.SubContent>
-        </DropdownMenu.Sub>
-
-        <DropdownMenu.Separator />
-        <DropdownMenu.Item>Share</DropdownMenu.Item>
-        <DropdownMenu.Item>Add to favorites</DropdownMenu.Item>
-        <DropdownMenu.Separator />
-        <DropdownMenu.Item shortcut="⌘ ⌫" color="red">
-          Delete
-        </DropdownMenu.Item>
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+    <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      
+       <div>
+       <Avatar className="size-10 rounded-lg">
+          <AvatarImage src={user.avatar ?? ""} alt={user.fullName ?? ""} />
+          <AvatarFallback className="rounded-lg">
+            <UserIcon className="size-5" />
+          </AvatarFallback>
+        </Avatar>
+       
+       </div>
+      
+    </DropdownMenuTrigger>
+    <DropdownMenuContent
+      className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+    
+      align="end"
+      sideOffset={4}
+    >
+      <DropdownMenuLabel className="p-0 font-normal">
+        <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+          <Avatar className="h-8 w-8 rounded-lg">
+            <AvatarImage src={user.avatar ?? ""} alt={user.fullName ?? ""} />
+            <AvatarFallback className="rounded-lg">
+              <UserIcon className="size-4" />
+            </AvatarFallback>
+          </Avatar>
+          <div className="grid flex-1 text-left text-sm leading-tight">
+            <span className="truncate font-semibold">
+              {user.fullName}
+            </span>
+            <span className="truncate text-xs">{user.email}</span>
+          </div>
+        </div>
+      </DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup >
+        {user?.user_metadata?.phone_verified && (
+          <DropdownMenuItem>
+            <BadgeCheck />
+            Verify
+          </DropdownMenuItem>
+        )}
+        <DropdownMenuItem>
+          <UserIcon />
+          Account
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Bell />
+          Notifications
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <LogoutMenu />
+      </DropdownMenuGroup>
+    </DropdownMenuContent>
+  </DropdownMenu>
   );
 }
 

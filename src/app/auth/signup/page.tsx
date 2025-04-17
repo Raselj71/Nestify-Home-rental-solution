@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import nestify from '@/public/nestify.png'
+
 import { SignupForm } from "./SignupForm"
 
 

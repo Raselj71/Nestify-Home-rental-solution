@@ -8,7 +8,7 @@ type MergedUser = User & Tables<"Users">;
 export function useAuth() {
   const supabase = createClient();
 
-  const { data: user, isLoading } = useQuery<MergedUser | null>({
+  const { data: user, isLoading } = useQuery({
     queryKey: ["auth-user"],
     queryFn: async () => {
       const { data: authData, error: authError } =
@@ -27,7 +27,11 @@ export function useAuth() {
         return null;
       }
 
-      return { ...authData.user, ...dbUser };
+      return { 
+        ...authData.user, 
+        ...dbUser, 
+        phone: dbUser.phone ?? null 
+      };
     },
   });
 

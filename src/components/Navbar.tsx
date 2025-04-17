@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Link } from "@radix-ui/themes";
+import { Box, Button, Container, Flex, Link } from "@radix-ui/themes";
 import Image from "next/image";
 import React from "react";
 import nestifyLogo from "../../public/nestify.png";
@@ -11,8 +11,9 @@ function Navbar() {
  
 
   return (
-    <Box>
-      <Flex justify={"between"} align={"center"}>
+    <Box className="bg-white border-b p-2 ">
+        <Container>
+        <Flex justify={"between"} align={"center"}>
         <Link href="/">
           <Image
             src={nestifyLogo}
@@ -23,7 +24,10 @@ function Navbar() {
           />
         </Link>
 
-        <Flex  gap={"2"} align={"center"}>
+        <Flex  gap={
+
+           "3"
+        } align={"center"}>
            
           <Button asChild className={cn('hover:no-underline no-underline text-white')}  variant="soft" size={
               {
@@ -39,6 +43,7 @@ function Navbar() {
 
         </Flex>
       </Flex>
+        </Container>
     </Box>
   );
 }

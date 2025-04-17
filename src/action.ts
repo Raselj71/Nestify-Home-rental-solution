@@ -25,7 +25,7 @@ export const LoginAction=async(state: LoginFormState, formData: FormData)=>{
         }
       }
 
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const {  error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
@@ -68,7 +68,20 @@ export const SignupAction=async(state: SingupFormState, formData: FormData)=>{
       }
      }
 
-     const {data,error:insertError}=await supabase.from('Users').insert({fullName: name, email, id: supaUser?.id, role: 'USER', createdAt: new Date().toISOString(), updateAt: new Date().toISOString()}) 
+     if (!supaUser?.id) {
+       return {
+         message: 'User ID is undefined',
+       };
+     }
+
+     const { error: insertError} = await supabase.from('Users').insert({
+       fullName: name,
+       email,
+       id: supaUser.id,
+       role: 'USER',
+       createdAt: new Date().toISOString(),
+       updateAt: new Date().toISOString(),
+     });
       if(insertError){
         return {
           message:insertError.message
@@ -81,7 +94,7 @@ export const SignupAction=async(state: SingupFormState, formData: FormData)=>{
 
 }
 
-export const logout=async()=>{
+export const logoutAction=async()=>{
 
   const supabase=await createClient()
   const {error}=await supabase.auth.signOut()
