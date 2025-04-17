@@ -5,6 +5,7 @@ import React from 'react'
 function layout({children}:{children:React.ReactNode}) {
   return (
     
+    
 
      
        <Container className='p-2'>
@@ -12,7 +13,7 @@ function layout({children}:{children:React.ReactNode}) {
             {children}
        </Container>
 
-       
+      
          
       
   )
