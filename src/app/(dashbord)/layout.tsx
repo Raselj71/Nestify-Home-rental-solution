@@ -10,7 +10,7 @@ function layout({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col gap-6">
         <Navbar />
 
-        <Container>
+        <Container className="p-4 lg:p-0">
           <BreadcrumbComponent />
 
           {children}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Theme } from "@radix-ui/themes";
+import { Theme, ThemePanel } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import '@radix-ui/themes/styles.css';
 import '@radix-ui/themes/layout.css';
@@ -47,11 +47,13 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
 
        
-       <Theme >
+       <Theme className="theme-custom"  appearance="light">
         <Provider>
            {children}
            
         </Provider>
+
+        <ThemePanel/>
        </Theme>
        </NextIntlClientProvider>
       </body>

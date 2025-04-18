@@ -46,15 +46,7 @@ model Property {
   updateAt  DateTime @updatedAt()
 }
 
-model Preference{
-  id        String   @id @default(uuid()) @db.Uuid
-  appearance String
-	accentColor String
-	grayColor String
-	radius String
-  scaling String
-  
-}
+
 
 enum property_type{
   FAMILY
