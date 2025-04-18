@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+
 
 import { Input } from "@/components/ui/input"
 
@@ -8,15 +8,15 @@ import { Label } from "@/components/ui/label"
 
 
 
-import { cn } from "@/lib/utils"
+
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Calendar } from "@/components/ui/calendar"
+
 import { Button } from "@radix-ui/themes"
 
 
 export default function PropertyForm() {
-  const [availableDate, setAvailableDate] = useState<Date | undefined>()
+ 
 
   return (
     <form className="max-w-3xl mx-auto space-y-6 p-6 border rounded-2xl shadow-sm">
@@ -105,12 +105,7 @@ export default function PropertyForm() {
         </div>
         <div>
           <Label>Available From</Label>
-          <Calendar
-            mode="single"
-            selected={availableDate}
-            onSelect={setAvailableDate}
-            className={cn("border rounded-md")}
-          />
+        
         </div>
       </div>
 

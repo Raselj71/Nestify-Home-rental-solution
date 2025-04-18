@@ -11,8 +11,8 @@ function Navbar() {
  
 
   return (
-    <Box className="bg-white border-b p-2 ">
-        <Container>
+    <Box className=" border-b p-2 ">
+        <Container >
         <Flex justify={"between"} align={"center"}>
         <Link href="/">
           <Image
@@ -29,12 +29,14 @@ function Navbar() {
            "3"
         } align={"center"}>
            
-          <Button asChild className={cn('hover:no-underline no-underline text-white')}  variant="soft" size={
+          <Button asChild style={{
+          
+          }} className={cn( ' ')}  variant="soft" size={
               {
                 lg:"3"
               }
           }>
-              <Link href="/add" color="green" className={cn( 'hover:no-underline no-underline')}> <Plus/> Add Property</Link>
+              <Link href="/add-property" color="green" className={cn( 'hover:no-underline no-underline')}> <Plus/> Add Property</Link>
           </Button>
 
            <EnController/>
