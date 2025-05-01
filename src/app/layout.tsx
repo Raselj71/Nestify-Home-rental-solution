@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { Theme, ThemePanel } from "@radix-ui/themes";
-import "@radix-ui/themes/styles.css";
+import '@radix-ui/themes/styles.css';
 import '@radix-ui/themes/styles.css';
 import '@radix-ui/themes/layout.css';
 import '@radix-ui/themes/tokens.css';
 import '@radix-ui/themes/components.css';
 import '@radix-ui/themes/utilities.css';
+import "./globals.css";
+
 import Provider from "./Provider";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { Theme, ThemePanel } from "@radix-ui/themes";
 
 
 const geistSans = Geist({
@@ -47,13 +48,13 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
 
        
-       <Theme className="theme-custom"  appearance="light">
+       <Theme  appearance="light">
         <Provider>
            {children}
            
         </Provider>
 
-        <ThemePanel/>
+       <ThemePanel/>
        </Theme>
        </NextIntlClientProvider>
       </body>

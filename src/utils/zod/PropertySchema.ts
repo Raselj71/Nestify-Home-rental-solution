@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const PropertySchema = z.object({
-    propertyDivison: z.string().min(1, { message: 'Please select property division' }),
+    propertyDivision: z.string().min(1, { message: 'Please select property division' }),
     propertyDistrict: z.string().min(1, { message: 'Please select property district' }),
     propertyUpzila: z.string().min(1, { message: 'Please select property upzila' }),
     propertySectorNo: z.string().optional(),

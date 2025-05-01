@@ -1,13 +1,14 @@
 import PropertyForm from '@/components/common/Form/AddPropertyForm'
 import { Card } from '@/components/ui/card'
+import { Flex } from '@radix-ui/themes'
 import { LocateIcon, Navigation } from 'lucide-react'
 import React from 'react'
 
 function page() {
   return (
-    <div className='w-full flex justify-center items-center'>
+    <Flex justify={'center'} mt={'4'}>
         
-         <Card className='p-12 w-full lg:w-2/3'>
+         <Card className='p-12 w-full lg:max-w-5xl'>
           <PropertyForm/>
             
                 
@@ -17,7 +18,7 @@ function page() {
          <div>
               
          </div>
-    </div>
+    </Flex>
   )
 }
 

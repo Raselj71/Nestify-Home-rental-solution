@@ -71,10 +71,10 @@ function LevelSelect({
   ...rest
 }: LabeledInputProps) {
   return (
-    <label className={cn("flex w-full flex-col", className)}>
+    <label className={cn("border-[1px] rounded-3 w-full ", className)}>
       {label && (
-        <Flex >
-          <Text as="label" size="1" color="gray">
+        <Flex className="px-2 mt-2">
+          <Text as="label" size="2" color="gray">
             {label}
           </Text>
           {required && <Text color="ruby">*</Text>}
@@ -86,32 +86,10 @@ function LevelSelect({
         control={control}
         disabled={isDisabled}
         render={({ field }) => (
-          // <TextField.Root
-          //     type={type}
-          //     value={field.value}
-          //     min={min}
-          //     max={max}
-          //     onChange={e => {
-          //         field.onChange(e);
-          //         if (onChange) {
-          //             onChange(e.target.value);
-          //         }
-          //     }}
-          //     onBlur={field.onBlur}
-          //     ref={field.ref}
-          //     size={size}
-          //     placeholder={placeholder}
-          //     disabled={isDisabled}
-          //     readOnly={isReadOnly}
-          //     {...rest}
-          // >
-          //     {icon && (
-          //         <TextField.Slot side={iconPosition}> {icon}</TextField.Slot>
-          //     )}
-          // </TextField.Root>
+          
 
           <Select  onValueChange={field.onChange}  {...rest} >
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full mx-0 border-0">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
 

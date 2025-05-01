@@ -1,10 +1,10 @@
-// import AddPropertyForm from "@/components/common/Form/AddPropertyForm";
+
 import PageHeader from "@/components/common/PageHeader";
 import { categories } from "@/utils/Data";
 import { Box, Card, Flex } from "@radix-ui/themes";
-// Removed unused imports
+
 import Link from "next/link";
-// import { Car } from "lucide-react";
+
 import React from "react";
 
 function page() {
@@ -54,17 +54,22 @@ function page() {
         }}
       >
           
-          <div className="flex flex-wrap justify-center gap-6 p-6 bg-gray-50">
+          <div className="flex flex-wrap justify-center gap-6 p-6 ">
         {categories.map((cat) => (
          <Link href={typeof cat.url === "string" ? cat.url : ""} key={cat.name}>
            
-           <div
+           <Card
             key={cat.name}
-            className="w-40 h-44 bg-white shadow-sm rounded-lg flex flex-col items-center justify-center gap-3 hover:shadow-md transition"
+            className="w-40 h-44 "
           >
-            <div className="bg-green-100 p-4 rounded-full">{cat.icon}</div>
+            <Flex className="1 h-full" align={'center'} justify={'center'} gap={'2'} direction={"column"}>
+            <div className="bg-green-7 p-4 rounded-full">{cat.icon}</div>
             <p className="text-sm font-medium text-green-600">{cat.name}</p>
-          </div>
+
+            </Flex>
+           
+            
+          </Card>
            </Link>
         ))}
       </div>
