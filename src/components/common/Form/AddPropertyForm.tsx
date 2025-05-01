@@ -2,19 +2,12 @@
 
 
 
-import { Input } from "@/components/ui/input"
-
-import { Label } from "@/components/ui/label"
 
 
 
-
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-
-import { Button, Grid } from "@radix-ui/themes"
+import {  Grid } from "@radix-ui/themes"
 import address, { DivisonName } from '@bangladeshi/bangladesh-address'
-import Levelnput from "../Levelnput"
+
 import { useForm, useWatch } from "react-hook-form"
 import { PropertySchema, TpropertySchema } from "@/utils/zod/PropertySchema"
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,6 +15,7 @@ import {  Navigation } from "lucide-react"
 import LevelSelect from "../LevelSelect"
 import { error } from "console"
 import { useEffect, useState } from "react"
+import { getDistrictsByDivision, getUpazilasByDistrict } from "@/utils/Address"
 
 
 
@@ -29,16 +23,17 @@ export default function PropertyForm() {
 
 const division = address.allDivision();
 
- const[district, setDistrict] = useState([]);
- const[upzila, setUpzila] = useState([]);
+ const[district, setDistrict] = useState<string[]>([]);
+ const[upzila, setUpzila] = useState<string[]>([]);
 
- console.log(address.divisionalDataOf(DivisonName.Khulna));
+
 
 
 
 
  const{control,reset,watch, formState:{errors,isSubmitting}} =useForm<TpropertySchema>({
   mode:'onTouched',
+  
   defaultValues:{
     proertyBedroom:0,
     proertyType:'house',
@@ -68,9 +63,16 @@ const division = address.allDivision();
 
       useEffect(()=>{
           if(propertyDivision){
-              setDistrict(address.divisionalDataOf(propertyDivision as DivisonName))
+              setDistrict(getDistrictsByDivision(propertyDivision ))
           }
       },[propertyDivision])
+
+
+      useEffect(()=>{
+        if(propertyDistrict){
+            setUpzila(getUpazilasByDistrict(propertyDistrict))
+        }
+    },[propertyDistrict])
 
 
 
@@ -89,7 +91,7 @@ const division = address.allDivision();
 
      
       
-          <LevelSelect control={control} data={division} name="propertyDivision" placeholder="Division" error={errors.propertyDivison} label="Division" required/>
+          <LevelSelect control={control} data={division} name="propertyDivision" placeholder="Division" error={errors.propertyDivision} label="Division" required/>
           <LevelSelect control={control} data={district} name="propertyDistrict" placeholder="Discrict" error={errors.propertyDistrict} label="District" required/>
           <LevelSelect control={control} data={upzila} name="propertyUpzila" placeholder="Area" error={errors.propertyUpzila} label="Area" required/>
 
