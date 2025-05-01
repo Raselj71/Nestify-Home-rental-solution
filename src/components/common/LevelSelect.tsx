@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { getAllDistricts, getAllUpazilas, getDistrictsByDivision, getUpazilasByDistrict } from "@/utils/Address";
 
 type LabeledInputProps = {
   label?: string;
@@ -45,7 +46,7 @@ type LabeledInputProps = {
   error?: {
     message?: string;
   };
-  onChange?: (value: string) => void;
+  onChange?: (value: string[]) => void;
   iconPosition?: "left" | "right";
   className?: string;
 };
@@ -68,6 +69,7 @@ function LevelSelect({
   onChange,
   iconPosition = "right",
   className,
+  
   ...rest
 }: LabeledInputProps) {
   return (
@@ -84,7 +86,8 @@ function LevelSelect({
       <Controller
         name={name}
         control={control}
-        disabled={isDisabled}
+        disabled={isDisabled || data.length===0}
+        
         render={({ field }) => (
           // <TextField.Root
           //     type={type}
@@ -110,7 +113,10 @@ function LevelSelect({
           //     )}
           // </TextField.Root>
 
-          <Select  onValueChange={field.onChange}  {...rest} >
+          <Select  onValueChange={(e)=>{
+               field.onChange(e)
+               onChange?.(name === 'propertyDivison' ? getDistrictsByDivision(e) : getUpazilasByDistrict(e))
+          }}  {...rest} >
             <SelectTrigger className="w-full">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
