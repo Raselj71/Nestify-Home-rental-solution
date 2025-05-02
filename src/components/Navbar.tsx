@@ -36,7 +36,7 @@ function Navbar() {
                 lg:"3"
               }
           }>
-              <Link href="/add-property" color="green" className={cn( 'hover:no-underline no-underline')}> <Plus/> Add Property</Link>
+              <Link href="/add-property"  className={cn( 'hover:no-underline no-underline')}> <Plus/> Add Property</Link>
           </Button>
 
            <EnController/>

@@ -582,3 +582,15 @@ export const upzila=[
   "Zakiganj",
   "Nobigonj"
 ]
+
+
+export const months = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+export const propertyTypes = ['house', 'unit', 'room', 'flat', 'floor', 'apartment'];
+
+export const propertyPriceTypes = ['weekly', 'monthly', 'daily'];
+
+export const propertyIncludes = ['electricity', 'water', 'gas', 'internet'];

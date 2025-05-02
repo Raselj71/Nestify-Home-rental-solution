@@ -12,18 +12,20 @@ export const PropertySchema = z.object({
     proertyType: z.enum(['house', 'unit', 'room', 'flat', 'floor', 'apartment'], {
         errorMap: () => ({ message: 'Please select a valid property type' }),
     }),
-    proertyBedroom: z.number().min(1, { message: 'Please enter the number of bedrooms' }),
-    propertyBathroom: z.number().min(1, { message: 'Please enter the number of bathrooms' }),
-    propertyBalcony: z.number().optional(),
-    propertyFloor: z.number().optional(),
-    propertySize: z.string().min(1, { message: 'Please select property size' }),
-    propertyPrice: z.number().min(1, { message: 'Please select property price' }),
+    proertyBedroom:  z.string().min(1, { message: 'Please enter the number of bedrooms' }),
+    propertyBathroom :  z.string().min(1, { message: 'Please enter the number of bathrooms' }) ,
+    propertyBalcony:  z.string().optional() ,
+    propertyFloor: z.string().optional() ,
+    propertySize: z.string().min(1, { message: 'Please select property size' }).optional(),
+    propertyPrice:  z.string().min(1, { message: 'Please select property price' }) ,
     propertyPriceType: z.enum(['weekly', 'monthly', 'daily'], {
         errorMap: () => ({ message: 'Please select a valid price type' }),
     }),
     propertyInclude: z
         .enum(['electricity', 'water', 'gas', 'internet'])
-        .optional()
+        .optional(),
+
+        propertyImages:z.array(z.string())  
        
 });
 

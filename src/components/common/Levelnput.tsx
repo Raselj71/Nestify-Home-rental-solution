@@ -61,12 +61,12 @@ function Levelnput({
 	...rest
 }: LabeledInputProps) {  
     return (
-		<label className={cn('flex w-full flex-col gap-1', className)}>
+		   <label className={cn(" rounded-3 w-full ", className)}>
 			{label && (
-				<Flex gap='1'>
-					<Text as='label' size='2' weight='bold'>
-						{label}
-					</Text>
+					<Flex className="px-2 mt-2">
+					  <Text as="label" size="2" color="gray">
+								{label}
+							  </Text>
 					{required && <Text color='ruby'>*</Text>}
 				</Flex>
 			)}
@@ -76,6 +76,7 @@ function Levelnput({
 				control={control}
 				render={({ field }) => (
 					<TextField.Root
+					    className=''
 						type={type}
 						value={field.value}
 						min={min}
