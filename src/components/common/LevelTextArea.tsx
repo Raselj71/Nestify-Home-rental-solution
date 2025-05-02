@@ -15,6 +15,7 @@ type LabeledTextAreaProps = {
 	error?: {
 		message?: string;
 	};
+	className?:string
 };
 
 const LabeledTextArea = ({
@@ -27,6 +28,7 @@ const LabeledTextArea = ({
 	placeholder,
 	columns = 3,
 	error,
+	className,
 	...rest
 }: LabeledTextAreaProps) => {
 	return (
@@ -43,12 +45,13 @@ const LabeledTextArea = ({
 				control={control}
 				render={({ field }) => (
 					<TextArea
+					     
 						{...field}
 						{...rest}
 						size={size}
 						placeholder={placeholder}
 						readOnly={isReadOnly}
-						className='border border-gray-a-6 outline-hidden ring-0'
+						className={`border border-gray-a-6 outline-hidden ring-0 ${className}`}
 						cols={columns}
 					/>
 				)}

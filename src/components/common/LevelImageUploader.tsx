@@ -1,141 +1,206 @@
-'use client';
+"use client";
 
-import React, { useRef, useState, useEffect } from 'react';
-import { Controller } from 'react-hook-form';
-import type { Control } from 'react-hook-form';
-import { cn } from '@/lib/utils';
 import {
-  Callout,
+  AspectRatio,
+  Badge,
+  Box,
   Flex,
-  Text,
   IconButton,
-  ScrollArea,
-  Separator,
-} from '@radix-ui/themes';
-import { Cross2Icon, UploadIcon } from '@radix-ui/react-icons';
+  Text,
+} from "@radix-ui/themes";
+import { useEffect, useState } from "react";
+import { PiNotePencilDuotone, PiTrashDuotone } from "react-icons/pi";
+import Image from "next/image";
 
-type Props = {
+import { cn } from "@/lib/utils";
+import showReport from "@/utils/ShowReport";
+import { MdCloudUpload } from "react-icons/md";
+
+type MultiImageInputProps = {
   label?: string;
-  name: string;
-  control: Control<any>;
   required?: boolean;
-  error?: {
-    message?: string;
-  };
+  previewRatio: number;
+  width?: number;
+  height?: number;
+  maxSize?: number;
+  fileNames?: string[]; // existing filenames if any
+  selectedImages: File[];
+  setSelectedImages: React.Dispatch<React.SetStateAction<File[]>>;
   className?: string;
-  maxFiles?: number;
 };
 
-const LevelImageUploader: React.FC<Props> = ({
+const MultiImageInput = ({
   label,
-  name,
-  control,
-  required = false,
-  error,
+  required,
+  previewRatio,
+  width = 400,
+  height = 400,
+  maxSize = 1,
+  fileNames = [],
+  selectedImages,
+  setSelectedImages,
   className,
-  maxFiles = 5,
-}) => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [images, setImages] = useState<File[]>([]);
+}: MultiImageInputProps) => {
+  const [inputId, setInputId] = useState("");
 
-  const handleFiles = (files: FileList | null) => {
-    if (!files) return;
-    const newFiles = Array.from(files);
-    const combined = [...images, ...newFiles].slice(0, maxFiles);
-    setImages(combined);
+  useEffect(() => {
+    setInputId(`multi-image-input-${crypto.randomUUID()}`);
+  }, []);
+
+  const handleImageChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    const validFiles: File[] = [];
+
+    for (const file of files) {
+      if (file.size > maxSize * 1024 * 1024) {
+        showReport(
+          "Error",
+          "Failed",
+          `File "${file.name}" exceeds ${maxSize} MB.`
+        );
+        continue;
+      }
+      if (
+        ![
+          "image/jpg",
+          "image/jpeg",
+          "image/png",
+          "image/webp",
+          "image/avif",
+        ].includes(file.type)
+      ) {
+        showReport("Error", "Failed", `"${file.name}" has unsupported format.`);
+        continue;
+      }
+      const bitmap = await createImageBitmap(file);
+
+      if (bitmap.width !== width || bitmap.height !== height) {
+        showReport(
+          "Error",
+          "Failed",
+          `"${file.name}" must be exactly ${width}x${height}.`
+        );
+        continue;
+      }
+      validFiles.push(file);
+    }
+
+    setSelectedImages((prev) => [...prev, ...validFiles]);
+  };
+
+  const getImageSrc = (image: File | string) => {
+    if (typeof image === "string") {
+      // Add your IMG_URL prefix here if needed
+      return image;
+    }
+    return URL.createObjectURL(image);
+  };
+
+  const removeImage = (index: number) => {
+    setSelectedImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
-    <label className={cn('w-full', className)}>
+    <Box>
       {label && (
-        <Flex className="px-2 mt-2">
-          <Text as="label" size="2" color="gray">
-            {label}
-          </Text>
-          {required && <Text color="ruby">*</Text>}
+        <Text size="2" weight="bold" align="center">
+          {label} {required && <span className="text-red-10">*</span>}
+        </Text>
+      )}
+
+      <Box
+        className={cn(
+          "w-full border border-dashed border-gray-a-6 rounded-2 p-4",
+          className
+        )}
+      >
+        <Flex
+          direction="column"
+          align="center"
+          justify="center"
+          className="w-full min-h-[200px] gap-4"
+        >
+          <input
+            type="file"
+            id={inputId}
+            accept="image/jpeg,image/png,image/webp,image/avif"
+            onChange={handleImageChange}
+            className="hidden"
+            multiple
+          />
+
+          <div className={cn("h-[180px] w-44 rounded-2 cursor-pointer")}>
+            <label
+              htmlFor={inputId}
+              className={`h-full w-full flex flex-col items-center justify-center gap-2 cursor-pointer`}
+            >
+              <MdCloudUpload size={"40"} />
+
+              <Text size="1" color="gray" align="center">
+                Drag & Drop or Click to Upload
+              </Text>
+            </label>
+          </div>
         </Flex>
-      )}
+      </Box>
 
-      <Controller
-        name={name}
-        control={control}
-        defaultValue={[]}
-        render={({ field }) => {
-          // Sync state with form value on mount/update
-          useEffect(() => {
-            field.onChange(images);
-          }, [images]);
+      <Box
+        className={cn(
+          "w-full border border-dashed border-gray-a-6 rounded-2 p-4",
+          className
+        )}
+      >
+        <Flex
+          direction="column"
+          align="center"
+          justify="center"
+          className="w-full  gap-4"
+        >
+          {selectedImages.length > 0 && (
+            <Flex
+              mt={"2"}
+              wrap="wrap"
+              gap="4"
+              justify="center"
+              className="w-full"
+            >
+              {[...selectedImages, ...fileNames].map((image, index) => (
+                <div key={index} className="relative w-44 border-2">
+                  <AspectRatio ratio={previewRatio}>
+                    <Image
+                      src={getImageSrc(image)}
+                      alt="Uploaded"
+                      width={width}
+                      height={height}
+                      className="rounded-2 object-cover "
+                    />
+                  </AspectRatio>
+                  <IconButton
+                    radius="full"
+                    color="red"
+                    variant="solid"
+                    className="absolute top-0 right-0 cursor-pointer"
+                    onClick={() => removeImage(index)}
+                    type="button"
+                  >
+                    <PiTrashDuotone />
+                  </IconButton>
+                </div>
+              ))}
+            </Flex>
+          )}
+        </Flex>
+      </Box>
 
-          return (
-            <>
-              <div
-                onClick={() => fileInputRef.current?.click()}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  handleFiles(e.dataTransfer.files);
-                }}
-                className="w-full mt-2 border border-dashed border-gray-300 rounded-md h-40 flex items-center justify-center cursor-pointer hover:border-gray-500 transition"
-              >
-                <Flex direction="column" align="center">
-                  <UploadIcon width={24} height={24} />
-                  <Text size="2" color="gray">
-                    Drag & Drop files here or click to browse
-                  </Text>
-                </Flex>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  hidden
-                  onChange={(e) => handleFiles(e.target.files)}
-                />
-              </div>
-
-              {images.length > 0 && (
-                <ScrollArea type="always" scrollbars="horizontal" className="mt-3">
-                  <Flex gap="3" className="overflow-x-auto py-2">
-                    {images.map((file, index) => (
-                      <div key={index} className="relative group">
-                        <img
-                          src={URL.createObjectURL(file)}
-                          alt="Preview"
-                          className="h-20 w-20 object-cover rounded-md border"
-                        />
-                        <IconButton
-                          color="red"
-                          variant="soft"
-                          size="1"
-                          className="absolute top-[-6px] right-[-6px] opacity-0 group-hover:opacity-100 transition"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            const updated = [...images];
-                            updated.splice(index, 1);
-                            setImages(updated);
-                          }}
-                        >
-                          <Cross2Icon />
-                        </IconButton>
-                      </div>
-                    ))}
-                  </Flex>
-                  <Separator size="4" />
-                </ScrollArea>
-              )}
-            </>
-          );
-        }}
-      />
-
-      {error?.message && (
-        <Callout.Root variant="soft" size="1" mt="2" color="red">
-          <Callout.Icon />
-          <Callout.Text>{error.message}</Callout.Text>
-        </Callout.Root>
-      )}
-    </label>
+      <Badge variant="soft" color="gray" mt="2">
+        Image must be {width}x{height}px & max {maxSize}MB.
+      </Badge>
+    </Box>
   );
 };
 
-export default LevelImageUploader;
+export default MultiImageInput;

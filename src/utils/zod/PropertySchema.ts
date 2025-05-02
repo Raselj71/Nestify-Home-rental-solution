@@ -21,11 +21,13 @@ export const PropertySchema = z.object({
     propertyPriceType: z.enum(['weekly', 'monthly', 'daily'], {
         errorMap: () => ({ message: 'Please select a valid price type' }),
     }),
-    propertyInclude: z
-        .enum(['electricity', 'water', 'gas', 'internet'])
-        .optional(),
 
-        propertyImages:z.array(z.string())  
+     propertyInclude : z
+    .array(z.enum(['electricity', 'water', 'gas', 'internet']))
+    .optional(),
+
+    propertyImages:z.array(z.string()),  
+    propertyDescription:z.string()    
        
 });
 
