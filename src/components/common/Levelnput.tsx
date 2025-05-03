@@ -76,7 +76,7 @@ function Levelnput({
 				control={control}
 				render={({ field }) => (
 					<TextField.Root
-					    className=''
+					   
 						type={type}
 						value={field.value}
 						min={min}

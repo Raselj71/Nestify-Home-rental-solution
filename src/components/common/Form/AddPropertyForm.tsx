@@ -3,7 +3,7 @@
 import { Box, Button, Flex, Grid, Text } from "@radix-ui/themes";
 
 import { useForm } from "react-hook-form";
-import { PropertySchema, TpropertySchema } from "@/utils/zod/PropertySchema";
+import { PropertySchema, TPropertySchema,  } from "@/utils/zod/PropertySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Gem, ImagePlus, Info, Navigation } from "lucide-react";
 import LevelSelect from "../LevelSelect";
@@ -36,7 +36,7 @@ export default function PropertyForm() {
 
   const [images, setImages] = useState<File[]>([]);
 
-  console.log(images);
+  
 
   const {
     control,
@@ -44,12 +44,30 @@ export default function PropertyForm() {
     watch,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<TpropertySchema>({
+  } = useForm<TPropertySchema>({
     mode: "onTouched",
 
     defaultValues: {
-      proertyBedroom: "1",
-      proertyType: "house",
+     propertyAvailable:'',
+     propertyType:'house',
+     propertyPrice:'',
+     propertyPriceType:'monthly',
+     propertyRoadNo:'',
+     propertyHouseNo:'',
+     propertyBalcony:'',
+     propertyFloor:'',
+     propertySize:'1',
+     propertyBathroom:'1',
+     propertyBedroom:'1',
+     propertyDescription:'',
+     propertyDistrict:'',
+     propertyDivision:'',
+     propertySectorNo:'',
+     propertyShortAddress:'',
+     propertyUpzila:''
+    
+      
+      
     },
     resolver: zodResolver(PropertySchema),
   });
@@ -69,9 +87,14 @@ export default function PropertyForm() {
     }
   }, [propertyDistrict]);
 
-  const onSubmit = async (data: TpropertySchema) => {
-    window.location.href = "/";
-    reset();
+  const onSubmit = async (data: TPropertySchema) => {
+     try{
+        console.log(data)
+     }catch(e){
+         console.log(e)
+     }
+    // window.location.href = "/";
+    // reset();
   };
 
   return (
@@ -156,6 +179,7 @@ export default function PropertyForm() {
           }}
         >
           <LevelTextArea
+            required
             size="3"
             control={control}
             name="propertyShortAddress"
@@ -199,9 +223,9 @@ export default function PropertyForm() {
           size="3"
           control={control}
           data={propertyTypes}
-          name="proertyType"
+          name="propertyType"
           placeholder="Property Type"
-          error={errors.proertyType}
+          error={errors.propertyType}
           label="Property Type"
           required
         />
@@ -209,9 +233,9 @@ export default function PropertyForm() {
           size="3"
           type="number"
           control={control}
-          name="proertyBedroom"
+          name="propertyBedroom"
           placeholder="Bedroom"
-          error={errors.proertyBedroom}
+          error={errors.propertyBedroom}
           label="Bedroom"
           required
         />
@@ -342,8 +366,8 @@ export default function PropertyForm() {
         </div>
       </Box>
 
-       <Flex>
-             <Button> Add property</Button>
+       <Flex justify={'end'}>
+             <Button type="submit" className="w-full! lg:w-fit!"> Add property</Button>
        </Flex>
 
 
