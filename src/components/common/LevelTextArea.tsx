@@ -34,7 +34,7 @@ const LabeledTextArea = ({
 	return (
 		<label>
 			{label && (
-			  <Text as="label" size="2" color="gray">
+			  <Text as="label" size="3">
 					{label}
 					{required && <span className='text-red-9'> *</span>}
 				</Text>

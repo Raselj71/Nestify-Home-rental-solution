@@ -8,6 +8,8 @@ export const LoginFormSchema = z.object({
     .trim(),
 });
 
+export type TLoginFormSchema = z.infer<typeof LoginFormSchema>;
+
 
 export const SignupFormSchema = z.object({
   name:z.string({message:'Please enter your name'}).trim(),
@@ -19,23 +21,5 @@ export const SignupFormSchema = z.object({
     .trim(),
 });
 
-export type LoginFormState =
-  | {
-      errors?: {
-        email?: string[];
-        password?: string[];
-      };
-      message?: string;
-    }
-  | undefined;
+export type TSignupFormSchema = z.infer<typeof SignupFormSchema>;
 
-  export type SingupFormState =
-  | {
-      errors?: {
-        name?: string[];
-        email?: string[];
-        password?: string[];
-      };
-      message?: string;
-    }
-  | undefined;  

@@ -67,158 +67,169 @@ export type Database = {
         }
         Relationships: []
       }
-      Address: {
+      Booking: {
         Row: {
           createdAt: string
-          district: string
-          division: string
           id: string
-          map: string | null
+          pointsUsed: number
           propertyId: string
-          updateAt: string
-          upzila: string
+          userId: string
         }
         Insert: {
           createdAt?: string
-          district: string
-          division: string
           id: string
-          map?: string | null
+          pointsUsed: number
           propertyId: string
-          updateAt: string
-          upzila: string
+          userId: string
         }
         Update: {
           createdAt?: string
-          district?: string
-          division?: string
           id?: string
-          map?: string | null
+          pointsUsed?: number
           propertyId?: string
-          updateAt?: string
-          upzila?: string
+          userId?: string
         }
         Relationships: [
           {
-            foreignKeyName: "Address_propertyId_fkey"
+            foreignKeyName: "Booking_propertyId_fkey"
             columns: ["propertyId"]
             isOneToOne: false
             referencedRelation: "Property"
             referencedColumns: ["id"]
           },
-        ]
-      }
-      info: {
-        Row: {
-          area: number | null
-          available: string | null
-          bathroom: number
-          bedroom: number
-          category: Database["public"]["Enums"]["property_type"]
-          createdAt: string
-          floor_no: number | null
-          gender: Database["public"]["Enums"]["gender"]
-          id: string
-          propertyId: string
-          updateAt: string
-        }
-        Insert: {
-          area?: number | null
-          available?: string | null
-          bathroom: number
-          bedroom: number
-          category: Database["public"]["Enums"]["property_type"]
-          createdAt?: string
-          floor_no?: number | null
-          gender: Database["public"]["Enums"]["gender"]
-          id: string
-          propertyId: string
-          updateAt: string
-        }
-        Update: {
-          area?: number | null
-          available?: string | null
-          bathroom?: number
-          bedroom?: number
-          category?: Database["public"]["Enums"]["property_type"]
-          createdAt?: string
-          floor_no?: number | null
-          gender?: Database["public"]["Enums"]["gender"]
-          id?: string
-          propertyId?: string
-          updateAt?: string
-        }
-        Relationships: [
           {
-            foreignKeyName: "info_propertyId_fkey"
-            columns: ["propertyId"]
+            foreignKeyName: "Booking_userId_fkey"
+            columns: ["userId"]
             isOneToOne: false
-            referencedRelation: "Property"
+            referencedRelation: "Users"
             referencedColumns: ["id"]
           },
         ]
-      }
-      Preference: {
-        Row: {
-          accentColor: string
-          appearance: string
-          grayColor: string
-          id: string
-          radius: string
-          scaling: string
-        }
-        Insert: {
-          accentColor: string
-          appearance: string
-          grayColor: string
-          id: string
-          radius: string
-          scaling: string
-        }
-        Update: {
-          accentColor?: string
-          appearance?: string
-          grayColor?: string
-          id?: string
-          radius?: string
-          scaling?: string
-        }
-        Relationships: []
       }
       Property: {
         Row: {
           createdAt: string
+          gender: string | null
           id: string
-          images: string[] | null
-          price: number
-          summary: string | null
-          title: string
-          updateAt: string
+          propertyAvailable: string
+          propertyBalcony: string | null
+          propertyBathroom: string
+          propertyBedroom: string
+          propertyBookingStatus: boolean
+          propertyCategory: string
+          propertyDescription: string | null
+          propertyDistrict: string
+          propertyDivision: string
+          propertyFloor: string | null
+          propertyHouseNo: string | null
+          propertyImages: string[] | null
+          propertyInclude: string[] | null
+          propertyPrice: string
+          propertyPriceType: Database["public"]["Enums"]["PriceType"]
+          propertyRoadNo: string | null
+          propertySeat: string | null
+          propertySectorNo: string | null
+          propertyShortAddress: string
+          propertySize: string | null
+          propertyType: Database["public"]["Enums"]["PropertyType"]
+          propertyUpzila: string
+          updatedAt: string
           userId: string
         }
         Insert: {
           createdAt?: string
+          gender?: string | null
           id: string
-          images?: string[] | null
-          price: number
-          summary?: string | null
-          title: string
-          updateAt: string
+          propertyAvailable: string
+          propertyBalcony?: string | null
+          propertyBathroom: string
+          propertyBedroom: string
+          propertyBookingStatus: boolean
+          propertyCategory: string
+          propertyDescription?: string | null
+          propertyDistrict: string
+          propertyDivision: string
+          propertyFloor?: string | null
+          propertyHouseNo?: string | null
+          propertyImages?: string[] | null
+          propertyInclude?: string[] | null
+          propertyPrice: string
+          propertyPriceType: Database["public"]["Enums"]["PriceType"]
+          propertyRoadNo?: string | null
+          propertySeat?: string | null
+          propertySectorNo?: string | null
+          propertyShortAddress: string
+          propertySize?: string | null
+          propertyType: Database["public"]["Enums"]["PropertyType"]
+          propertyUpzila: string
+          updatedAt: string
           userId: string
         }
         Update: {
           createdAt?: string
+          gender?: string | null
           id?: string
-          images?: string[] | null
-          price?: number
-          summary?: string | null
-          title?: string
-          updateAt?: string
+          propertyAvailable?: string
+          propertyBalcony?: string | null
+          propertyBathroom?: string
+          propertyBedroom?: string
+          propertyBookingStatus?: boolean
+          propertyCategory?: string
+          propertyDescription?: string | null
+          propertyDistrict?: string
+          propertyDivision?: string
+          propertyFloor?: string | null
+          propertyHouseNo?: string | null
+          propertyImages?: string[] | null
+          propertyInclude?: string[] | null
+          propertyPrice?: string
+          propertyPriceType?: Database["public"]["Enums"]["PriceType"]
+          propertyRoadNo?: string | null
+          propertySeat?: string | null
+          propertySectorNo?: string | null
+          propertyShortAddress?: string
+          propertySize?: string | null
+          propertyType?: Database["public"]["Enums"]["PropertyType"]
+          propertyUpzila?: string
+          updatedAt?: string
           userId?: string
         }
         Relationships: [
           {
             foreignKeyName: "Property_userId_fkey"
+            columns: ["userId"]
+            isOneToOne: false
+            referencedRelation: "Users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      saveProperty: {
+        Row: {
+          id: string
+          propertyId: string
+          userId: string
+        }
+        Insert: {
+          id: string
+          propertyId: string
+          userId: string
+        }
+        Update: {
+          id?: string
+          propertyId?: string
+          userId?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saveProperty_propertyId_fkey"
+            columns: ["propertyId"]
+            isOneToOne: false
+            referencedRelation: "Property"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "saveProperty_userId_fkey"
             columns: ["userId"]
             isOneToOne: false
             referencedRelation: "Users"
@@ -235,6 +246,7 @@ export type Database = {
           fullName: string | null
           id: string
           phone: string | null
+          point: number
           role: Database["public"]["Enums"]["user_role"]
           updateAt: string
         }
@@ -246,6 +258,7 @@ export type Database = {
           fullName?: string | null
           id: string
           phone?: string | null
+          point?: number
           role?: Database["public"]["Enums"]["user_role"]
           updateAt: string
         }
@@ -257,10 +270,49 @@ export type Database = {
           fullName?: string | null
           id?: string
           phone?: string | null
+          point?: number
           role?: Database["public"]["Enums"]["user_role"]
           updateAt?: string
         }
         Relationships: []
+      }
+      WalletTransaction: {
+        Row: {
+          createdAt: string
+          id: string
+          meta: Json | null
+          points: number
+          reason: string | null
+          type: Database["public"]["Enums"]["WalletTransactionType"]
+          userId: string
+        }
+        Insert: {
+          createdAt?: string
+          id: string
+          meta?: Json | null
+          points: number
+          reason?: string | null
+          type: Database["public"]["Enums"]["WalletTransactionType"]
+          userId: string
+        }
+        Update: {
+          createdAt?: string
+          id?: string
+          meta?: Json | null
+          points?: number
+          reason?: string | null
+          type?: Database["public"]["Enums"]["WalletTransactionType"]
+          userId?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "WalletTransaction_userId_fkey"
+            columns: ["userId"]
+            isOneToOne: false
+            referencedRelation: "Users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -270,15 +322,17 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      gender: "MALE" | "FEMALE"
-      property_type:
-        | "FAMILY"
-        | "BACHELOR"
-        | "OFFICE"
-        | "SUBLET"
-        | "HOSTEL"
-        | "SHOP"
+      PriceType: "daily" | "weekly" | "monthly"
+      PropertyType:
+        | "house"
+        | "unit"
+        | "room"
+        | "flat"
+        | "floor"
+        | "apartment"
+        | "seat"
       user_role: "ADMIN" | "USER"
+      WalletTransactionType: "RECHARGE" | "BOOKING" | "REFUND" | "ADJUSTMENT"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -397,16 +451,18 @@ export const Constants = {
   },
   public: {
     Enums: {
-      gender: ["MALE", "FEMALE"],
-      property_type: [
-        "FAMILY",
-        "BACHELOR",
-        "OFFICE",
-        "SUBLET",
-        "HOSTEL",
-        "SHOP",
+      PriceType: ["daily", "weekly", "monthly"],
+      PropertyType: [
+        "house",
+        "unit",
+        "room",
+        "flat",
+        "floor",
+        "apartment",
+        "seat",
       ],
       user_role: ["ADMIN", "USER"],
+      WalletTransactionType: ["RECHARGE", "BOOKING", "REFUND", "ADJUSTMENT"],
     },
   },
 } as const

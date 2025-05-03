@@ -15,13 +15,16 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-
-
 model Users{
   id  String   @id @default(uuid()) @db.Uuid
   email String  @unique
   phone String  ?@unique
-  
+  point Int  @default(200)
+  booking Booking[]
+
+  wallet WalletTransaction[]
+  saveProperty saveProperty[]
+
   fullName String ?
   fcm_token String ?
   avatar String?
@@ -32,67 +35,107 @@ model Users{
 
 }   
 
+model saveProperty{
+   id String     @id @default(uuid()) @db.Uuid
+   userId String @db.Uuid
+   User Users @relation(fields: [userId],references: [id])
+   propertyId String @unique @db.Uuid
+   property Property @relation(fields: [propertyId], references: [id])
+
+
+
+}
+
 model Property {
-  id        String   @id @default(uuid()) @db.Uuid
-  title     String
-  summary   String?
-  address   Address?
-  userId    String   @db.Uuid // Ensure this matches the `id` field in the `Users` model
-  user      Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  images    String[]
-  price     Int
-  basic_info info?
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt()
+  id                   String     @id @default(uuid())@db.Uuid
+
+  userId String @db.Uuid
+  users     Users @relation(fields: [userId], references: [id])
+  booking Booking ?
+  saveProperty saveProperty?
+
+  propertyCategory     String
+  gender               String?
+  propertySeat         String? 
+  propertyDivision     String
+  propertyDistrict     String
+  propertyUpzila       String
+  propertySectorNo     String?    // Optional
+  propertyRoadNo       String?    // Optional
+  propertyHouseNo      String?    // Optional
+  propertyShortAddress String
+  propertyAvailable    String
+  propertyType         PropertyType
+  propertyBedroom      String
+  propertyBathroom     String
+  propertyBalcony      String?    // Optional
+  propertyFloor        String?    // Optional
+  propertySize         String?    // Optional
+  propertyPrice        String
+  propertyPriceType    PriceType
+  propertyInclude      String[]   
+  propertyImages       String[]
+  propertyDescription  String?    
+  propertyBookingStatus Boolean
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
 }
 
+enum PropertyType {
+  house
+  unit
+  room
+  flat
+  floor
+  apartment
+  seat
 
-
-enum property_type{
-  FAMILY
-  BACHELOR
-  OFFICE
-  SUBLET
-  HOSTEL
-  SHOP
 }
 
-model info{
-  id        String   @id @default(uuid()) @db.Uuid
-  bedroom Int 
-  bathroom Int
-  area Int ?
-  available DateTime?
-  floor_no Int?
-  category property_type
-  gender gender
-  propertyId String @unique  @db.Uuid
-  property Property @relation(fields: [propertyId],references: [id])
-  createdAt DateTime @default(now())
-  updateAt DateTime @updatedAt()
-}
-model Address{
-  id      String   @id @default(uuid()) @db.Uuid
-  division String
-  district String
-  upzila String
-  map String ?
-
-  propertyId String @unique  @db.Uuid
-  property Property @relation(fields: [propertyId],references: [id])
-  createdAt DateTime @default(now())
-  updateAt DateTime @updatedAt()
-
-
- 
-}
-
-enum gender{
-  MALE
-  FEMALE
+enum PriceType {
+  daily
+  weekly
+  monthly
 }
 
 enum user_role {
   ADMIN
   USER
+}
+
+
+model Booking {
+  id         String    @id @default(uuid())@db.Uuid
+
+  userId     String @db.Uuid
+  user Users @relation(fields: [userId],references: [id])
+  
+  propertyId String @unique @db.Uuid
+
+  pointsUsed Int
+
+  property   Property  @relation(fields: [propertyId], references: [id])
+
+  createdAt  DateTime  @default(now())
+}
+
+
+model WalletTransaction {
+  id        String   @id @default(uuid())@db.Uuid
+  userId    String @db.Uuid
+  type      WalletTransactionType
+  points    Int      // positive for credit, negative for debit
+  reason    String?  // e.g. "Booking Property", "Recharge", "Admin Adjustment"
+  meta      Json?    // optional metadata like bookingId, paymentId, etc.
+
+  user      Users     @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+enum WalletTransactionType {
+  RECHARGE   // from payment
+  BOOKING    // deduct points for booking
+  REFUND     // add back points
+  ADJUSTMENT // admin manual adjustment
 }

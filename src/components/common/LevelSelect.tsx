@@ -68,8 +68,8 @@ function LevelSelect({
   return (
     <label className={cn(" rounded-3 w-full ", className)}>
       {label && (
-        <Flex className="px-2 mt-2">
-          <Text as="label" size="2" color="gray">
+        <Flex className=" my-2">
+          <Text as="label" size="3" >
             {label}
           </Text>
           {required && <Text color="ruby">*</Text>}

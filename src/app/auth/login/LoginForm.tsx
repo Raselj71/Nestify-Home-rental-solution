@@ -2,58 +2,80 @@
 import { cn } from "@/lib/utils"
 
 
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { useActionState } from "react"
 
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { LoginAction } from "@/action"
-import { Button } from "@/components/ui/Button"
+import { Button, Card, Heading } from "@radix-ui/themes"
+import Levelnput from "@/components/common/Levelnput"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { LoginFormSchema, TLoginFormSchema } from "@/utils/zod/AuthSchema"
+import { useForm } from "react-hook-form"
+import { LoginAction } from "@/action/LoginAction"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
 
-   const[state,formAction,isPending]= useActionState(LoginAction, undefined)
+    const {
+      control,
+      reset,
+      watch,
+      handleSubmit,
+      formState: { errors, isSubmitting },
+    } = useForm<TLoginFormSchema>({
+      mode: "onTouched",
   
+      defaultValues: {
+      email:'',
+      password:''
+      
+        
+        
+      },
+      resolver: zodResolver(LoginFormSchema),
+    });
+  
+const onSubmit=async(data:TLoginFormSchema)=>{
+
+  try {
+    const response=  LoginAction(data)
+    
+     
+  } catch (error) {
+    console.log(error)
+    
+  }
+
+}
+
+
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
+   
+      <Card >
+        <div className="px-5">
+          <Heading className="text-2xl">Login</Heading>
+          <div className="mt-2 text-3">
             Enter your email below to login to your account
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form action={formAction}>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                  name="email"
-                />
-              </div>
-              {state?.errors?.email && <p className="text-xs text-red-500">{state.errors.email}</p>}
-              <div className="grid gap-2">
+          </div>
+        </div>
+        <div className="px-5">
+          <form onSubmit={handleSubmit(onSubmit)} >
+            <div className="flex flex-col gap-2">
+             
+                 <Levelnput size="3" control={control} name="email" placeholder="email" error={errors.email} label="Email" required/>
+              
+             
+              <div className="grid ">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+                 
                    <Link  className="ml-auto inline-block text-sm underline-offset-4 hover:underline" href={'/auth/forget-password'}>Forget Passowrd</Link>
                 </div>
-                <Input id="password" type="password" name="password" required />
-                {state?.errors?.password && <p className="text-xs text-red-500">{state.errors.password}</p>}
-                {state?.message && <p className="text-xs text-red-500">{state.message}</p>}
+                  <Levelnput size="3" control={control} error={errors.password} name="password" placeholder="password" label="Password"/>               
               </div>
-              <Button type="submit" className="w-full bg-green-700">
-                {isPending? "Loading..." :"Login"}
+              <Button size={'3'} type="submit" className="w-full">
+                {isSubmitting? "Loading..." :"Login"}
               </Button>
             
             </div>
@@ -62,8 +84,8 @@ export function LoginForm({
               <Link className="underline underline-offset-4" href={'/auth/signup'}> Sign up</Link>
             </div>
           </form>
-        </CardContent>
+        </div>
       </Card>
-    </div>
+   
   )
 }

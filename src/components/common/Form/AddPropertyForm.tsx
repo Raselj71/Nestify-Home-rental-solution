@@ -355,7 +355,7 @@ export default function PropertyForm() {
         <Flex
           gap={"4"}
           align={"center"}
-          className=" text-accent-10 font-medium"
+          className=" text-accent-10 my-3 font-medium"
         >
           <MdOutlineDescription  size={'24'}/> <Text>Full Description</Text>
         </Flex>
