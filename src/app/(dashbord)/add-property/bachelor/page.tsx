@@ -1,4 +1,5 @@
 import PropertyForm from "@/components/common/Form/AddPropertyForm";
+import BachelorPropertyForm from "@/components/common/Form/BachelorPropertyForm";
 import { Card } from "@/components/ui/card";
 import { Flex } from "@radix-ui/themes";
 import { LocateIcon, Navigation } from "lucide-react";
@@ -8,7 +9,7 @@ function page() {
   return (
     <Flex direction="column" className="gap-4">
       <Card className="p-12 w-full lg:max-w-5xl overflow-visible">
-        <PropertyForm />
+          <BachelorPropertyForm/>
       </Card>
 
       <div></div>

@@ -1,30 +1,38 @@
 import { z } from "zod";
 
 export const PropertySchema = z.object({
-    propertyDivision: z.string().min(1, { message: 'Please select property division' }),
-    propertyDistrict: z.string().min(1, { message: 'Please select property district' }),
-    propertyUpzila: z.string().min(1, { message: 'Please select property upzila' }),
-    propertySectorNo: z.string().optional(),
-    propertyRoadNo: z.string().optional(),
-    propertyHouseNo: z.string().optional(),
-    propertyShortAddress: z.string().optional(),
-    propertyAvailable: z.string().min(1, { message: 'Please select property available' }),
-    proertyType: z.enum(['house', 'unit', 'room', 'flat', 'floor', 'apartment'], {
-        errorMap: () => ({ message: 'Please select a valid property type' }),
-    }),
-    proertyBedroom: z.number().min(1, { message: 'Please enter the number of bedrooms' }),
-    propertyBathroom: z.number().min(1, { message: 'Please enter the number of bathrooms' }),
-    propertyBalcony: z.number().optional(),
-    propertyFloor: z.number().optional(),
-    propertySize: z.string().min(1, { message: 'Please select property size' }),
-    propertyPrice: z.number().min(1, { message: 'Please select property price' }),
-    propertyPriceType: z.enum(['weekly', 'monthly', 'daily'], {
-        errorMap: () => ({ message: 'Please select a valid price type' }),
-    }),
-    propertyInclude: z
-        .enum(['electricity', 'water', 'gas', 'internet'])
-        .optional()
-       
+  propertyDivision: z.string().min(1, { message: 'Please select property division' }),
+  propertyDistrict: z.string().min(1, { message: 'Please select property district' }),
+  propertyUpzila: z.string().min(1, { message: 'Please select property upzila' }),
+  
+  propertySectorNo: z.string().optional(),
+  propertyRoadNo: z.string().optional(),
+  propertyHouseNo: z.string().optional(),
+  propertyShortAddress: z.string().min(1, { message: 'Please enter property short address' }),
+
+  propertyAvailable: z.string().min(1, { message: 'Please select property availability' }),
+
+  propertyType: z.enum(['house', 'unit', 'room', 'flat', 'floor', 'apartment'], {
+    errorMap: () => ({ message: 'Please select a valid property type' }),
+  }),
+
+  propertyBedroom: z.string().min(1, { message: 'Please enter the number of bedrooms' }),
+  propertyBathroom: z.string().min(1, { message: 'Please enter the number of bathrooms' }),
+  propertyBalcony: z.string().optional(),
+  propertyFloor: z.string().optional(),
+  propertySize: z.string().min(1, { message: 'Please enter property size' }).optional(),
+
+  propertyPrice: z.string().min(1, { message: 'Please enter property price' }),
+
+  propertyPriceType: z.enum(['daily', 'weekly', 'monthly'], {
+    errorMap: () => ({ message: 'Please select a valid price type' }),
+  }),
+
+  propertyInclude: z.array(z.enum(['electricity', 'water', 'gas', 'internet'])).optional(),
+
+ 
+
+  propertyDescription: z.string().optional(),
 });
 
-export type TpropertySchema = z.infer<typeof PropertySchema>;
+export type TPropertySchema = z.infer<typeof PropertySchema>;

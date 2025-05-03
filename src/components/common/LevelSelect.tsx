@@ -3,17 +3,10 @@ import React, { ReactNode } from "react";
 import { Controller } from "react-hook-form";
 import type { Control } from "react-hook-form";
 import { cn } from "@/lib/utils";
-import { Callout, Flex, Text, TextField } from "@radix-ui/themes";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+import { Callout, Flex, Select, Text, TextField } from "@radix-ui/themes";
+
 import { getAllDistricts, getAllUpazilas, getDistrictsByDivision, getUpazilasByDistrict } from "@/utils/Address";
+import { SelectTrigger } from "@radix-ui/react-select";
 
 type LabeledInputProps = {
   label?: string;
@@ -73,7 +66,7 @@ function LevelSelect({
   ...rest
 }: LabeledInputProps) {
   return (
-    <label className={cn("border-[1px] rounded-3 w-full ", className)}>
+    <label className={cn(" rounded-3 w-full ", className)}>
       {label && (
         <Flex className="px-2 mt-2">
           <Text as="label" size="2" color="gray">
@@ -88,26 +81,28 @@ function LevelSelect({
         control={control}
         disabled={isDisabled || data.length===0}
         
+        
         render={({ field }) => (
           
 
-          <Select  onValueChange={field.onChange}  {...rest} >
-            <SelectTrigger className="w-full mx-0 border-0">
-              <SelectValue placeholder={placeholder} />
-            </SelectTrigger>
+          <Select.Root  size={size}  onValueChange={field.onChange}  {...rest} >
+            	<Select.Trigger
+								placeholder={placeholder}
+								className={'w-full!'}
+							/>
 
-            <SelectContent>
-              <SelectGroup>
-              <SelectLabel>Divsion</SelectLabel>
+            <Select.Content>
+              <Select.Group>
+              <Select.Label>{label}</Select.Label>
 
                 {data.map((item, index) => (
-                  <SelectItem key={index} value={item}>
+                  <Select.Item key={index} value={item}>
                     {item}
-                  </SelectItem>
+                  </Select.Item>
                 ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+              </Select.Group>
+            </Select.Content>
+          </Select.Root>
         )}
       />
 

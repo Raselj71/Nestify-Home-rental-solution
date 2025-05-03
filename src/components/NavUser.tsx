@@ -16,7 +16,7 @@ function NavUser() {
  
 
   if (!user || loading) return null;
-  console.log("user", user);
+
 
   return (
     <DropdownMenu>
