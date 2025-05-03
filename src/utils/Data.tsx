@@ -2,7 +2,6 @@ import { Building2, Home, House, Plus, Share2, User } from "lucide-react";
 
 export const categories = [
     { name: 'Family', icon: <Home className="h-6 w-6 text-gray-600" />, url: 'add-property/family' },
-    { name: 'Room', icon: <House className="h-6 w-6 text-gray-600" />, url: 'add-property/room' },    
     { name: 'Bachelor', icon: <User className="h-6 w-6 text-gray-600"  />, url: 'add-property/bachelor' },
     { name: 'Office', icon: <Building2 className="h-6 w-6 text-gray-600" /> ,url: 'add-property/office' },
     { name: 'Sublet', icon: <Plus className="h-6 w-6 text-gray-600" /> , url: 'add-property/sublet' },
