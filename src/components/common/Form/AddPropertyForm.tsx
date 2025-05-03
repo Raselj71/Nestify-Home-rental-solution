@@ -27,6 +27,9 @@ import { MdOutlineDescription } from "react-icons/md";
 import LevelCheckboxGroup from "../LevelCheckboxGroup";
 import LevelImageUploader from "../LevelImageUploader";
 import LabeledTextEditor from "../LevelTextEditor";
+import { uploadImagesAndGetUrls } from "@/action/FileUploader";
+import { SubmitPropertyAction } from "@/action/SubmitPropertyAction";
+import { enqueueSnackbar } from "notistack";
 
 export default function PropertyForm() {
   const division = getAllDivisions();
@@ -89,7 +92,30 @@ export default function PropertyForm() {
 
   const onSubmit = async (data: TPropertySchema) => {
      try{
-        console.log(data)
+        const url= await uploadImagesAndGetUrls(images)
+
+       const response = await SubmitPropertyAction(data,'house',url)
+        console.log(url)
+
+        if(response.success){
+          enqueueSnackbar(response.message,{
+            anchorOrigin:{
+              vertical:'bottom',
+              horizontal:'right'
+            },
+            variant:'success'
+          })
+           setImages([])
+          reset()
+        }else{
+           enqueueSnackbar(response.message,{
+            anchorOrigin:{
+              vertical:'bottom',
+              horizontal:'right'
+            },
+            variant:'error'
+          })
+        }
      }catch(e){
          console.log(e)
      }
@@ -367,7 +393,7 @@ export default function PropertyForm() {
       </Box>
 
        <Flex justify={'end'}>
-             <Button type="submit" className="w-full! lg:w-fit!"> Add property</Button>
+             <Button type="submit" className="w-full! lg:w-fit!"> {isSubmitting ? 'Loading...' : 'Add property'}</Button> 
        </Flex>
 
 
