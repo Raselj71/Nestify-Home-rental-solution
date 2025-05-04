@@ -7,31 +7,6 @@ export type Json =
   | Json[]
 
 export type Database = {
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          operationName?: string
-          query?: string
-          variables?: Json
-          extensions?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       Booking: {
@@ -44,7 +19,7 @@ export type Database = {
         }
         Insert: {
           createdAt?: string
-          id: string
+          id?: string
           pointsUsed: number
           propertyId: string
           userId: string
@@ -94,6 +69,7 @@ export type Database = {
           propertyPrice: string
           propertyPriceType: Database["public"]["Enums"]["PriceType"]
           propertyRoadNo: string | null
+          propertyRoom: string | null
           propertySeat: string | null
           propertySectorNo: string | null
           propertyShortAddress: string
@@ -106,7 +82,7 @@ export type Database = {
         Insert: {
           createdAt?: string
           gender?: string | null
-          id: string
+          id?: string
           propertyAvailable: string
           propertyBalcony?: string | null
           propertyBathroom: string
@@ -123,6 +99,7 @@ export type Database = {
           propertyPrice: string
           propertyPriceType: Database["public"]["Enums"]["PriceType"]
           propertyRoadNo?: string | null
+          propertyRoom?: string | null
           propertySeat?: string | null
           propertySectorNo?: string | null
           propertyShortAddress: string
@@ -152,6 +129,7 @@ export type Database = {
           propertyPrice?: string
           propertyPriceType?: Database["public"]["Enums"]["PriceType"]
           propertyRoadNo?: string | null
+          propertyRoom?: string | null
           propertySeat?: string | null
           propertySectorNo?: string | null
           propertyShortAddress?: string
@@ -178,7 +156,7 @@ export type Database = {
           userId: string
         }
         Insert: {
-          id: string
+          id?: string
           propertyId: string
           userId: string
         }
@@ -255,7 +233,7 @@ export type Database = {
         }
         Insert: {
           createdAt?: string
-          id: string
+          id?: string
           meta?: Json | null
           points: number
           reason?: string | null
@@ -413,9 +391,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {
       PriceType: ["daily", "weekly", "monthly"],

@@ -63,7 +63,7 @@ function page() {
             className="w-40 h-44 "
           >
             <Flex className="1 h-full" align={'center'} justify={'center'} gap={'2'} direction={"column"}>
-            <div className="bg-green-7 p-4 rounded-full">{cat.icon}</div>
+            <div className="bg-accent-7 p-4 rounded-full">{cat.icon}</div>
             <p className="text-sm font-medium text-green-600">{cat.name}</p>
 
             </Flex>

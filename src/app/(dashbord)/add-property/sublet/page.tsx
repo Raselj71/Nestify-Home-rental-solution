@@ -1,5 +1,6 @@
 
 import BachelorPropertyForm from "@/components/common/Form/BachelorPropertyForm";
+import SubletPropertyForm from "@/components/common/Form/SubletPropertyForm";
 import { Card } from "@/components/ui/card";
 import { Box, Flex, Heading } from "@radix-ui/themes";
 
@@ -12,7 +13,7 @@ function page() {
           <Heading>Sublet</Heading>
       </Box>
       <Card className="p-12 w-full lg:max-w-5xl overflow-visible">
-        <BachelorPropertyForm />
+        <SubletPropertyForm/>
       </Card>
 
       <div></div>

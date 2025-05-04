@@ -48,7 +48,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
 
        
-       <Theme  appearance="light">
+       <Theme accentColor="green" appearance="light">
         <Provider>
            {children}
            

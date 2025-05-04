@@ -9,8 +9,17 @@ export const SubmitPropertyAction=async(data: TPropertySchema, propertyCategory:
     const supabase= await createClient()
 
     const {data:User, error}= await supabase.auth.getUser()
+    if (!User.user?.id) {
+      return {
+          error: 'User ID is undefined',
+          success: false,
+          message: 'Authentication error: User ID is required',
+          payload: null,
+      };
+  }
 
     const{error:PropertyError}= await supabase.from('Property').insert({
+
         propertyAvailable:data.propertyAvailable,
         propertyBalcony:data.propertyBalcony,
         propertyBathroom:data.propertyBathroom,
