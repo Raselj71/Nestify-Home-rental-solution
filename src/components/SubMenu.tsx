@@ -1,10 +1,13 @@
-import { Button, Container, Dialog, DropdownMenu, Flex, IconButton, Link } from "@radix-ui/themes";
-import { Building, Home } from "lucide-react";
+import { Button, Container, Dialog, DropdownMenu, Flex,Text, IconButton, Link } from "@radix-ui/themes";
+import { Building, Cross, Home } from "lucide-react";
 import React from "react";
 import { PiMagnifyingGlass } from "react-icons/pi";
 import { IoHome } from "react-icons/io5";
 import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
 import { getAllDivisions } from "@/utils/Address";
+import { FiX } from "react-icons/fi";
+import SearchComponent from "./SearchComponent";
+
 
 
 function SubMenu() {
@@ -37,17 +40,7 @@ function SubMenu() {
              </DropdownMenu.Root>
         </Flex>
 
-        <Dialog.Root>
-          <Dialog.Trigger>
-            <Button size="3" variant="soft">
-              <PiMagnifyingGlass />
-            </Button>
-          </Dialog.Trigger>
-
-          <Dialog.Content>
-            <div>rasel</div>
-          </Dialog.Content>
-        </Dialog.Root>
+            <SearchComponent/>
       </Flex>
     </Container>
   );
