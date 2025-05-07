@@ -3,6 +3,10 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 
 const nextConfig: NextConfig = {
+
+  images: {
+    domains: ['vbvrjwacyhoznglwnqzv.supabase.co'],
+  },
   /* config options here */
 };
 

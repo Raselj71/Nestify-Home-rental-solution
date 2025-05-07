@@ -1,38 +1,62 @@
-import { Button, Flex } from '@radix-ui/themes'
-import React from 'react'
-import Levelnput from '../Levelnput'
-import { useForm } from 'react-hook-form'
-import { SearchFormSchema, TSearchFormSchema } from '@/utils/zod/SearchSchema'
-import { zodResolver } from '@hookform/resolvers/zod'
+"use client";
 
-function SearchForm() {
+import { Box, Button, Flex } from "@radix-ui/themes";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import Levelnput from "../Levelnput";
+
+
+import { SearchFormSchema, TSearchFormSchema } from "@/utils/zod/SearchSchema";
+
+export default function OfficePropertyForm() {
+
+ 
+
+  
 
   const {
-      control,
-      reset,
-      watch,
-      handleSubmit,
-      formState: { errors, isSubmitting },
-    } = useForm<TSearchFormSchema>({
-      mode: "onTouched",
-  
-      defaultValues: {
-       
+    control,
+    reset,
+    watch,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<TSearchFormSchema>({
+    mode: "onTouched",
+
+    defaultValues: {
+      searchItem:''
+     
       
+    },
+    resolver: zodResolver(SearchFormSchema),
+  });
+
+  
+
+
+  const onSubmit = async (data: TSearchFormSchema) => {
+     try{
+
+       console.log(data)
         
-        
-      },
-      resolver: zodResolver(SearchFormSchema),
-    });
+     }catch(e){
+         console.log(e)
+     }
+    // window.location.href = "/";
+    // reset();
+  };
+
   return (
-    <form>
-      <Flex >
-         <Levelnput control={control} name='search' placeholder='Search Here' error={errors.search}/>
-         <Button variant='outline'>Search</Button>
-      </Flex>
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <Flex gap={'4'} my="6">
+        
+          <Levelnput size="3" placeholder="search here" control={control} name="searchItem" error={errors.searchItem}/>
+          <Button size={'3'}>Search</Button>
+       </Flex> 
+      
 
     </form>
-  )
+  );
 }
-
-export default SearchForm
