@@ -11,10 +11,7 @@ import {
   Text,
 } from '@radix-ui/themes';
 
-type CheckboxOption = {
-  label: string;
-  value: string;
-};
+
 
 type Props = {
   label?: string;

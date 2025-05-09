@@ -3,7 +3,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import Pagination from './Pagination'
-import { Box, Card, Grid, Text } from '@radix-ui/themes'
+import { Box, Grid } from '@radix-ui/themes'
 import { Database } from '@/utils/Database'
 
 import Property from './Property'
@@ -33,7 +33,7 @@ export default function PropertyList({ data, total, page, perPage }: Props) {
                lg:'5'
              }}>
       {data.map((item:Database["public"]["Tables"]["Property"]["Row"]) => {
-          return <Property item={item}/> 
+          return <Property key={item.id} item={item}/> 
       })}
 
      

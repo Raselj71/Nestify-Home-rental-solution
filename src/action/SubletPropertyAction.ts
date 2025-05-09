@@ -8,7 +8,7 @@ export const SubletPropertyAction=async(data: TSubletSchema, propertyCategory: s
 
     const supabase= await createClient()
 
-    const {data:User, error}= await supabase.auth.getUser()
+    const {data:User,}= await supabase.auth.getUser()
 
     if (!User.user?.id) {
         return {

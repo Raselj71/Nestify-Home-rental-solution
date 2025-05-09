@@ -9,7 +9,7 @@ import {
   Text,
 } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
-import { PiNotePencilDuotone, PiTrashDuotone } from "react-icons/pi";
+import {  PiTrashDuotone } from "react-icons/pi";
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";

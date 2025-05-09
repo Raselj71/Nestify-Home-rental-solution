@@ -1,15 +1,17 @@
-// app/property/[id]/page.tsx
-
 import PropertyList from '@/components/common/PropertyList'
 import { createClient } from '@/utils/supabase/ServerClient'
-
 import { Box } from '@radix-ui/themes'
 
-export default async function Page({ params, searchParams }: { 
-  params: { id: string }, 
-  searchParams: { page?: string } 
-}) {
-  const page = parseInt(searchParams.page || '1')
+interface PageProps {
+  params: Promise<{ id: string }>
+  searchParams?:Promise < { page?: string } >
+}
+
+export default async function Page({ params, searchParams }: PageProps) {
+   const paramsData = await params
+   const searchParamsData = await searchParams
+
+  const page = parseInt(searchParamsData?.page || '1', 10)
   const perPage = 10
   const from = (page - 1) * perPage
   const to = from + perPage - 1
@@ -19,7 +21,7 @@ export default async function Page({ params, searchParams }: {
   const { data, count } = await supabase
     .from('Property')
     .select('*', { count: 'exact' })
-    .filter('propertyDivision', 'eq', params.id)
+    .eq('propertyDivision', paramsData.id)
     .range(from, to)
 
   return (

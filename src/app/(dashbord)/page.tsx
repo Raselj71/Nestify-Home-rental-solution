@@ -1,8 +1,8 @@
-import { Box, Flex, Grid, Heading,Text } from '@radix-ui/themes'
+import { Box, Flex, Grid, Heading } from '@radix-ui/themes'
 
 import React from 'react'
 
-import { getTranslations } from 'next-intl/server';
+
 import { createClient } from '@/utils/supabase/ServerClient';
 import Property from '@/components/common/Property';
 import Slider from '@/components/common/Slider';
@@ -10,11 +10,11 @@ import Slider from '@/components/common/Slider';
 
 
  async function page() {
-  const t = await getTranslations('HomePage');
+ 
 
     const supabase= await createClient()
 
-  const { data, error } = await supabase
+  const { data } = await supabase
   .from('Property')
   .select('*')
   .order('createdAt', { ascending: false }) 
@@ -47,7 +47,7 @@ import Slider from '@/components/common/Slider';
           }}>
                  {
                   data?.map((item)=>{
-                    return <Property item={item}/> 
+                    return <Property key={item.id} item={item}/> 
                   })
                  }
                 

@@ -1,9 +1,8 @@
 
-import HostelPropertyForm from "@/components/common/Form/HostelPropertyForm";
 import OfficePropertyForm from "@/components/common/Form/OfficePropertyForm";
-import SubletPropertyForm from "@/components/common/Form/SubletPropertyForm";
-import { Card } from "@/components/ui/card";
-import { Box, Flex, Heading } from "@radix-ui/themes";
+
+
+import { Box, Card, Flex, Heading } from "@radix-ui/themes";
 
 import React from "react";
 

@@ -20,7 +20,7 @@ import {
   months,
   propertyIncludes,
   propertyPriceTypes,
-  propertyTypes,
+ 
 } from "@/utils/Data";
 import { MdOutlineDescription } from "react-icons/md";
 
@@ -30,7 +30,6 @@ import LabeledTextEditor from "../LevelTextEditor";
 import { uploadImagesAndGetUrls } from "@/action/FileUploader";
 
 import { enqueueSnackbar } from "notistack";
-import { BachelorPropertyAction } from "@/action/BachelorPropertyAction";
 import { SubletSchema, TSubletSchema } from "@/utils/zod/SubletSchema";
 import { SubletPropertyAction } from "@/action/SubletPropertyAction";
 

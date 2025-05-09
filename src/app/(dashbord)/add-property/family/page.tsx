@@ -1,6 +1,6 @@
 import PropertyForm from "@/components/common/Form/AddPropertyForm";
-import { Card } from "@/components/ui/card";
-import { Box, Flex, Heading } from "@radix-ui/themes";
+
+import { Box, Card, Flex, Heading } from "@radix-ui/themes";
 
 import React from "react";
 

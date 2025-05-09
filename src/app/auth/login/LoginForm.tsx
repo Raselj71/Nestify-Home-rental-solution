@@ -1,5 +1,5 @@
 'use client'
-import { cn } from "@/lib/utils"
+
 
 
 import Link from "next/link"
@@ -12,15 +12,11 @@ import { LoginFormSchema, TLoginFormSchema } from "@/utils/zod/AuthSchema"
 import { useForm } from "react-hook-form"
 import { LoginAction } from "@/action/LoginAction"
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+export function LoginForm() {
 
     const {
       control,
-      reset,
-      watch,
+     
       handleSubmit,
       formState: { errors, isSubmitting },
     } = useForm<TLoginFormSchema>({
@@ -40,6 +36,7 @@ const onSubmit=async(data:TLoginFormSchema)=>{
 
   try {
     const response=  LoginAction(data)
+    console.log(response)
     
      
   } catch (error) {
