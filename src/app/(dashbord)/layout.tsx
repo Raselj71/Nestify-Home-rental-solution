@@ -1,4 +1,5 @@
 import { BreadcrumbComponent } from "@/components/Breadcumb";
+import Footer from "@/components/common/Footer";
 import Navbar from "@/components/Navbar";
 import SubMenu from "@/components/SubMenu";
 import { Box, Container } from "@radix-ui/themes";
@@ -16,6 +17,7 @@ function layout({ children }: { children: React.ReactNode }) {
 
           {children}
         </Container>
+        <Footer/>
       </div>
     </Box>
   );

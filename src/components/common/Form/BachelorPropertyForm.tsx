@@ -96,7 +96,7 @@ export default function PropertyForm() {
      try{
         const url= await uploadImagesAndGetUrls(images)
 
-       const response = await BachelorPropertyAction(data,'house',url)
+       const response = await BachelorPropertyAction(data,'bachelor',url)
         
 
         if(response.success){

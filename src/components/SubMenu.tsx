@@ -1,16 +1,20 @@
-import { Button, Container, Dialog, DropdownMenu, Flex,Text, IconButton, Link } from "@radix-ui/themes";
-import { Building, Cross, Home } from "lucide-react";
+import { Button, Container, DropdownMenu, Flex, Link } from "@radix-ui/themes";
+import { Building } from "lucide-react";
 import React from "react";
-import { PiMagnifyingGlass } from "react-icons/pi";
+
 import { IoHome } from "react-icons/io5";
-import { DropdownMenuArrow } from "@radix-ui/react-dropdown-menu";
+
 import { getAllDivisions } from "@/utils/Address";
-import { FiX } from "react-icons/fi";
+
 import SearchComponent from "./SearchComponent";
 
 
 
 function SubMenu() {
+
+
+     const divisons= getAllDivisions()
+   
   return (
     <Container className="p-2">
       <Flex justify={'between'}>
@@ -25,8 +29,8 @@ function SubMenu() {
               <DropdownMenu.Content className="w-44 p-0!">
 
                  {
-                    getAllDivisions().map((item)=>{
-                        return <Link key={item} href={`property/${item}`}>
+                    divisons.map((item)=>{
+                        return <Link underline="none" key={item} href={`/property/${item}`}>
                           <DropdownMenu.Item>{item}</DropdownMenu.Item>
                         </Link> 
                               

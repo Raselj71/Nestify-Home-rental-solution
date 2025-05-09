@@ -1,22 +1,57 @@
+import { Database } from "@/utils/Database";
+import { Box, Link, Text } from "@radix-ui/themes";
+import Image from "next/image";
+import React from "react";
+import { IoMdTrendingUp } from "react-icons/io";
 
-import { AspectRatio, Box,Text } from '@radix-ui/themes'
-import Image from 'next/image'
-import React from 'react'
 
-function Property({images, category, propertyType }:{images:string[] ,category:string, propertyType:string}) {
+function Property({
+  item,
+}: {
+  item: Database["public"]["Tables"]["Property"]["Row"];
+}) {
   return (
-     <Box >
-      
-           <Image src={images[0]} alt='title' className='max-w-sm object-cover' width={1280} height={720}>
+    <Link href={`/property/view/${item.id}`} underline="none" className="hover:cursor-pointer">
+    
+    <Box className="max-w-[220px] rounded-xl overflow-hidden  border hover:shadow-6 transition-all bg-white">
+      <div className="relative h-[140px] w-full">
+        <Image
+          src={item.propertyImages?.[0] ?? "/default-image.jpg"}
+          alt={item.propertyShortAddress || "Property image"}
+          fill
+          className="object-cover"
+        />
+        {/* Optional: Top-right arrow icon */}
+        <div className="absolute top-2 right-2 bg-blue-10 rounded-full p-1">
+           <IoMdTrendingUp className="text-white-a-10"/>
 
+        </div>
+      </div>
 
-           </Image>
-
-        
-        <Text>{category} {propertyType} Rent</Text>
-        
-     </Box>
-  )
+      <div className="p-2">
+        <Text className="font-medium text-sm text-blue-600">
+          {/* {item.title || "Family House Rent"} */}
+          {item.propertyCategory} {item.propertyType} Rent
+        </Text>
+        <Text className="block text-xs text-gray-600 mt-1">
+          Bed: {item.propertyBedroom}, Bath: {item.propertyBathroom}
+        </Text>
+        <Text className="block text-xs text-gray-600 italic">
+          To-let from:{" "}
+          <span className="font-medium not-italic">
+            {item.propertyAvailable || "N/A"}
+          </span>
+        </Text>
+        <Text className="block text-xs font-semibold text-gray-700">
+          Rent : {item.propertyPrice} BDT
+        </Text>
+        <Text className="block text-xs text-gray-500">
+          {item.propertyDistrict}, {item.propertyUpzila}
+        </Text>
+      </div>
+    </Box>
+    </Link>
+  );
 }
 
-export default Property
+export default Property;

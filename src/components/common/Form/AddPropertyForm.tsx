@@ -94,7 +94,7 @@ export default function PropertyForm() {
      try{
         const url= await uploadImagesAndGetUrls(images)
 
-       const response = await SubmitPropertyAction(data,'house',url)
+       const response = await SubmitPropertyAction(data,'family',url)
         console.log(url)
 
         if(response.success){

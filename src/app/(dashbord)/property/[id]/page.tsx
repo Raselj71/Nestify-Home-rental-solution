@@ -1,21 +1,30 @@
-import { createClient } from '@/utils/supabase/ServerClient';
-import React from 'react'
+// app/property/[id]/page.tsx
 
-async function page(props: {
-	params: Promise<{ [key: string]: string | string[] }>;
+import PropertyList from '@/components/common/PropertyList'
+import { createClient } from '@/utils/supabase/ServerClient'
+
+import { Box } from '@radix-ui/themes'
+
+export default async function Page({ params, searchParams }: { 
+  params: { id: string }, 
+  searchParams: { page?: string } 
 }) {
+  const page = parseInt(searchParams.page || '1')
+  const perPage = 10
+  const from = (page - 1) * perPage
+  const to = from + perPage - 1
 
-   const param= await props.params
-   console.log(param)
-  const supabase = await createClient();
-  const {data, error}= await supabase.from('Property').select('*')
+  const supabase = await createClient()
 
-  console.log(data)
-   
+  const { data, count } = await supabase
+    .from('Property')
+    .select('*', { count: 'exact' })
+    .filter('propertyDivision', 'eq', params.id)
+    .range(from, to)
 
   return (
-    <div>page</div>
+    <Box>
+      <PropertyList data={data || []} total={count || 0} page={page} perPage={perPage} />
+    </Box>
   )
 }
-
-export default page

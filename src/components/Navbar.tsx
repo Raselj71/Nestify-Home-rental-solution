@@ -31,7 +31,7 @@ function Navbar() {
            
           <Button asChild style={{
           
-          }} className={cn( ' ')}  variant="soft" size={
+          }} className={cn( 'hidden md:flex ')}  variant="soft" size={
               {
                 lg:"3"
               }
