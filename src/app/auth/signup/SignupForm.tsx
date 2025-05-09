@@ -1,11 +1,7 @@
 'use client'
-import { cn } from "@/lib/utils"
 
-
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import Link from "next/link"
-import { useActionState } from "react"
+
 import { Button, Card, Heading } from "@radix-ui/themes"
 import { useForm } from "react-hook-form"
 import { SignupFormSchema, TSignupFormSchema } from "@/utils/zod/AuthSchema"
@@ -15,15 +11,12 @@ import Levelnput from "@/components/common/Levelnput"
 import { enqueueSnackbar } from "notistack"
 
 
-export function SignupForm({
-  className,
-  ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+export function SignupForm() {
 
   
     const {
          control,
-         setError,
+         
          handleSubmit,
          formState: { errors, isSubmitting },
        } = useForm<TSignupFormSchema>({

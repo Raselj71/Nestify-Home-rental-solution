@@ -78,7 +78,11 @@ function NavUser() {
           </DropdownMenu.Item>
 
           <DropdownMenu.Separator />
-          <LogoutMenu />
+
+          <DropdownMenu.Item>
+              <LogoutMenu />
+          </DropdownMenu.Item>
+          
         </DropdownMenu.Group>
       </DropdownMenu.Content>
     </DropdownMenu.Root>

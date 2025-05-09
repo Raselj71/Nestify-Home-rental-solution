@@ -1,4 +1,4 @@
-import { Building2, Home, House, Plus, Share2, User } from "lucide-react";
+import { Building2, Home, Plus, Share2, User } from "lucide-react";
 
 export const categories = [
     { name: 'Family', icon: <Home className="h-6 w-6 text-gray-600" />, url: 'add-property/family' },

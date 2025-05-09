@@ -1,9 +1,9 @@
-import { Box, Button, Dialog, Flex, Heading, Inset, Separator, Text } from '@radix-ui/themes'
+import { Box, Button, Dialog, Flex, Heading, Separator } from '@radix-ui/themes'
 
 import React from 'react'
 import { FiX } from 'react-icons/fi'
 import { PiMagnifyingGlass } from 'react-icons/pi'
-import Levelnput from './common/Levelnput'
+
 import SearchForm from './common/Form/SearchForm'
 import Search from './common/Form/Search'
 

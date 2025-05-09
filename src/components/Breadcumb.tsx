@@ -1,20 +1,13 @@
 "use client"
 
-import {
-  Breadcrumb,
-
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+import { Slot } from "@radix-ui/react-slot"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { Fragment } from "react"
 
 export function BreadcrumbComponent() {
   const pathname = usePathname()
-  const pathSegments = pathname.split("/").filter((segment) => segment)
+  const pathSegments = pathname.split("/").filter(Boolean)
 
   const breadcrumbs = pathSegments.map((segment, index) => {
     const href = "/" + pathSegments.slice(0, index + 1).join("/")
@@ -22,34 +15,40 @@ export function BreadcrumbComponent() {
     const isLast = index === pathSegments.length - 1
 
     return (
-      <div className="flex items-center" key={href}>
-        <BreadcrumbItem>
+      <Fragment key={href}>
+        <li>
           {isLast ? (
-            <BreadcrumbPage>{label}</BreadcrumbPage>
+            <span className="text-muted-foreground capitalize">{label}</span>
           ) : (
-            <BreadcrumbLink asChild>
+            <Slot className="text-sm font-medium capitalize text-primary hover:underline">
               <Link href={href}>{label}</Link>
-            </BreadcrumbLink>
+            </Slot>
           )}
-        </BreadcrumbItem>
-        {!isLast && <BreadcrumbSeparator />}
-      </div>
+        </li>
+        {!isLast && (
+          <li aria-hidden="true">
+            <span className="mx-2 text-muted-foreground">/</span>
+          </li>
+        )}
+      </Fragment>
     )
   })
 
   return (
-    <div className="py-4">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href="/">Home</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          {pathSegments.length > 0 && <BreadcrumbSeparator />}
-          {breadcrumbs}
-        </BreadcrumbList>
-      </Breadcrumb>
-    </div>
+    <nav className="py-4" aria-label="Breadcrumb">
+      <ol className="flex items-center space-x-1 text-sm">
+        <li>
+          <Link href="/" className="text-primary font-medium hover:underline">
+            Home
+          </Link>
+        </li>
+        {pathSegments.length > 0 && (
+          <li aria-hidden="true">
+            <span className="mx-2 text-muted-foreground">/</span>
+          </li>
+        )}
+        {breadcrumbs}
+      </ol>
+    </nav>
   )
 }
