@@ -5,6 +5,7 @@ import React from 'react'
 import { getTranslations } from 'next-intl/server';
 import { createClient } from '@/utils/supabase/ServerClient';
 import Property from '@/components/common/Property';
+import Slider from '@/components/common/Slider';
 
 
 
@@ -27,7 +28,12 @@ import Property from '@/components/common/Property';
             <Text> {t('body')} </Text>
        </Flex> */}
 
-       <Grid gapX={'4'} columns={{
+       <Box> 
+         <Slider/>
+           
+       </Box>
+
+       {/* <Grid gapX={'4'} columns={{
         initial:'1',
          lg:'3'
        }} gap={'4'} >
@@ -38,7 +44,7 @@ import Property from '@/components/common/Property';
           }
             
             
-       </Grid>
+       </Grid> */}
 
     </div>
   )
