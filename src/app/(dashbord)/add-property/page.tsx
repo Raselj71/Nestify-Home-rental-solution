@@ -54,7 +54,7 @@ function page() {
         }}
       >
           
-          <div className="flex flex-wrap justify-center gap-6 p-6 ">
+          <div className="flex flex-wrap justify-center gap-4  lg:gap-6 lg:p-6 ">
         {categories.map((cat) => (
          <Link href={typeof cat.url === "string" ? cat.url : ""} key={cat.name}>
            

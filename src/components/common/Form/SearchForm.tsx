@@ -49,7 +49,10 @@ export default function OfficePropertyForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-      <Flex gap={'4'} my="6">
+      <Flex gap={{
+        initial:'2',
+        lg:'4'
+      }} my="6">
         
           <Levelnput size="3" placeholder="search here" control={control} name="searchItem" error={errors.searchItem}/>
           <Button size={'3'}>Search</Button>

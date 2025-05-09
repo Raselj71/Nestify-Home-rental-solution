@@ -16,7 +16,10 @@ function SearchComponent() {
         </Button>
       </Dialog.Trigger>
 
-      <Dialog.Content>
+      <Dialog.Content size={{
+        initial:'2',
+        lg:'3'
+      }}>
        
         <Flex justify={'between'}>
           <Heading >Search</Heading>

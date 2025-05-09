@@ -80,7 +80,10 @@ export default function OfficePropertyForm() {
        </Flex> 
 
        <Separator size={'4'} mt={'3'}/>
-       <Flex gap={'4'}>
+       <Flex  gap={{
+        initial:'2',
+        lg:'4'
+       }}>
     
        <LevelSelect
           size="3"

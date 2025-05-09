@@ -45,7 +45,7 @@ export default function Slider() {
       }}
       className="w-full"
     >
-      <div className="w-full aspect-[3/1] relative overflow-hidden rounded-xl">
+      <div className="w-full aspect-[3/1] relative ">
         {images.map((img) => (
           <TabsContent
             key={img.id}

@@ -36,14 +36,16 @@ import Slider from '@/components/common/Slider';
            
        </Box>
           <Flex justify={'center'} direction={'column'} align={'center'}  mb={'4'} mt={'4'}>
-              <Heading as='h2'>NESTIFY - HOUSE RENT SOLUTION</Heading>
+              <Heading as='h2' className='text-center '>NESTIFY - HOUSE RENT SOLUTION</Heading>
               <Heading mt={'2'} as='h3'>Recent Upload</Heading>
           </Flex>
 
           <Grid align={'center'} gap={'4'} columns={{
             initial:'2',
             md:'3',
-            lg:'5'
+            sm:'3',
+            xl:'5',
+            lg:'4'
           }}>
                  {
                   data?.map((item)=>{

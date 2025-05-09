@@ -28,10 +28,12 @@ export default function PropertyList({ data, total, page, perPage }: Props) {
   return (
     <Box>
      <Grid align={'center'} gap={'4'} columns={{
-               initial:'2',
-               md:'3',
-               lg:'5'
-             }}>
+                initial:'2',
+                md:'3',
+                sm:'3',
+                xl:'5',
+                lg:'4'
+              }}>
       {data.map((item:Database["public"]["Tables"]["Property"]["Row"]) => {
           return <Property key={item.id} item={item}/> 
       })}

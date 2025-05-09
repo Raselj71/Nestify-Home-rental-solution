@@ -13,7 +13,7 @@ function Property({
   return (
     <Link href={`/property/view/${item.id}`} underline="none" className="hover:cursor-pointer">
     
-    <Box className="max-w-[220px] rounded-xl overflow-hidden  border hover:shadow-6 transition-all bg-white">
+    <Box className="max-w-[220px] rounded-xl overflow-hidden  border hover:shadow-3 transition-all bg-white">
       <div className="relative h-[140px] w-full">
         <Image
           src={item.propertyImages?.[0] ?? "/default-image.jpg"}
@@ -22,30 +22,30 @@ function Property({
           className="object-cover"
         />
         {/* Optional: Top-right arrow icon */}
-        <div className="absolute top-2 right-2 bg-blue-10 rounded-full p-1">
+        <div className="absolute top-2 right-2 bg-green-10 rounded-full p-1">
            <IoMdTrendingUp className="text-white-a-10"/>
 
         </div>
       </div>
 
       <div className="p-2">
-        <Text className="font-medium text-sm text-blue-600">
+        <Text truncate className="font-medium text-sm ">
           {/* {item.title || "Family House Rent"} */}
           {item.propertyCategory} {item.propertyType} Rent
         </Text>
-        <Text className="block text-xs text-gray-600 mt-1">
+        <Text truncate className="block text-xs  mt-1">
           Bed: {item.propertyBedroom}, Bath: {item.propertyBathroom}
         </Text>
-        <Text className="block text-xs text-gray-600 italic">
+        <Text truncate className="block text-xs  italic">
           To-let from:{" "}
           <span className="font-medium not-italic">
             {item.propertyAvailable || "N/A"}
           </span>
         </Text>
-        <Text className="block text-xs font-semibold text-gray-700">
+        <Text truncate className="block text-xs font-semibold ">
           Rent : {item.propertyPrice} BDT
         </Text>
-        <Text className="block text-xs text-gray-500">
+        <Text truncate className="block text-xs ">
           {item.propertyDistrict}, {item.propertyUpzila}
         </Text>
       </div>

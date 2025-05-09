@@ -2,9 +2,11 @@
 
 import { useAuth } from '@/hooks/useAuth'
 import React from 'react'
-import { BadgeCheck, Bell, UserIcon } from 'lucide-react'
+import { BadgeCheck,  CreditCard, Heart, House, HousePlus, Star, UserIcon ,History, HandCoins } from 'lucide-react'
 import LogoutMenu from './common/LogoutMenu'
 import { Avatar, Box, DropdownMenu, Flex, Link, Text } from '@radix-ui/themes'
+
+
 
 function NavUser() {
   const { user, loading } = useAuth()
@@ -19,7 +21,10 @@ function NavUser() {
           style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
         >
           <Avatar
-            size="3"
+            size={{
+              initial:'2',
+              lg:'3'
+            }}
             radius="large"
             fallback={<UserIcon size={16} />}
             src={user.avatar ?? ''}
@@ -43,7 +48,7 @@ function NavUser() {
                 {user.fullName}
               </Text>
               <Text color="gray" size="1" truncate>
-                {user.email}
+                Current Point: {user.point}
               </Text>
             </Box>
           </Flex>
@@ -69,12 +74,69 @@ function NavUser() {
               </Flex>
             </Link>
           </DropdownMenu.Item>
+           
+            <DropdownMenu.Item asChild>
+            <Link className=' hover:border-none'  href="/add-property" underline="none">
+              <Flex align="center" gap="2">
+                <Star  size={16} />
+                <Text size="2">Order Now</Text>
+              </Flex>
+            </Link>
+          </DropdownMenu.Item>
 
-          <DropdownMenu.Item>
-            <Flex align="center" gap="2">
-              <Bell size={16} />
-              <Text size="2">Notifications</Text>
-            </Flex>
+          <DropdownMenu.Item asChild>
+            <Link className=' hover:border-none'  href="/add-property" underline="none">
+              <Flex align="center" gap="2">
+                <History  size={16} />
+                <Text size="2">Order History</Text>
+              </Flex>
+            </Link>
+          </DropdownMenu.Item>
+
+          <DropdownMenu.Item asChild>
+            <Link className=' hover:border-none'  href="/add-property" underline="none">
+              <Flex align="center" gap="2">
+                <HousePlus  size={16} />
+                <Text size="2">Add Property</Text>
+              </Flex>
+            </Link>
+          </DropdownMenu.Item>
+
+           <DropdownMenu.Item asChild>
+            <Link  href="/my-property" underline="none">
+              <Flex align="center" gap="2">
+                <House  size={16} />
+                <Text size="2">My Property</Text>
+              </Flex>
+            </Link>
+          </DropdownMenu.Item>
+
+            <DropdownMenu.Item asChild>
+            <Link  href="/my-property" underline="none">
+              <Flex align="center" gap="2">
+                <CreditCard   size={16} />
+                <Text size="2">Purchase History</Text>
+              </Flex>
+            </Link>
+          </DropdownMenu.Item>
+
+            <DropdownMenu.Item asChild>
+            <Link  href="/my-property" underline="none">
+              <Flex align="center" gap="2">
+                <Heart   size={16} />
+                <Text size="2">Saved Property</Text>
+              </Flex>
+            </Link>
+          </DropdownMenu.Item>
+
+
+         <DropdownMenu.Item asChild>
+            <Link  href="/my-property" underline="none">
+              <Flex align="center" gap="2">
+                <HandCoins    size={16} />
+                <Text size="2">Buy Point</Text>
+              </Flex>
+            </Link>
           </DropdownMenu.Item>
 
           <DropdownMenu.Separator />
