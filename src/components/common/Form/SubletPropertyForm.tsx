@@ -258,7 +258,7 @@ export default function SubletPropertyForm() {
           label="Property Type"
           required
         />
-        <Levelnput size="3" control={control} name="room" placeholder="Seat/Room" error={errors.room} label="Seat/Room" required/>
+        <Levelnput size="3" type="number" control={control} name="room" placeholder="1" error={errors.room} label="Seat/Room" required/>
         <Levelnput
           size="3"
           type="number"

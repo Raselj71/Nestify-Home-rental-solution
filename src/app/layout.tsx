@@ -11,7 +11,7 @@ import "./globals.css";
 import Provider from "./Provider";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import { Theme } from "@radix-ui/themes";
+import { Theme, ThemePanel } from "@radix-ui/themes";
 
 
 const geistSans = Geist({
@@ -54,7 +54,7 @@ export default async function RootLayout({
            
         </Provider>
 
-       
+         <ThemePanel/>
        </Theme>
        </NextIntlClientProvider>
       </body>

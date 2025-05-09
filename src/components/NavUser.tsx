@@ -1,82 +1,88 @@
-"use client";
-import { useAuth } from "@/hooks/useAuth";
+'use client'
 
-
-import React from "react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { BadgeCheck, Bell, UserIcon } from "lucide-react";
-
-import LogoutMenu from "./common/LogoutMenu";
-
+import { useAuth } from '@/hooks/useAuth'
+import React from 'react'
+import { BadgeCheck, Bell, UserIcon } from 'lucide-react'
+import LogoutMenu from './common/LogoutMenu'
+import { Avatar, Box, DropdownMenu, Flex, Link, Text } from '@radix-ui/themes'
 
 function NavUser() {
-  const { user, loading } = useAuth();
+  const { user, loading } = useAuth()
 
- 
-
-  if (!user || loading) return null;
-
+  if (!user || loading) return null
 
   return (
-    <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      
-       <div>
-       <Avatar className="size-10 rounded-lg">
-          <AvatarImage src={user.avatar ?? ""} alt={user.fullName ?? ""} />
-          <AvatarFallback className="rounded-lg">
-            <UserIcon className="size-5" />
-          </AvatarFallback>
-        </Avatar>
-       
-       </div>
-      
-    </DropdownMenuTrigger>
-    <DropdownMenuContent
-      className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-    
-      align="end"
-      sideOffset={4}
-    >
-      <DropdownMenuLabel className="p-0 font-normal">
-        <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-          <Avatar className="h-8 w-8 rounded-lg">
-            <AvatarImage src={user.avatar ?? ""} alt={user.fullName ?? ""} />
-            <AvatarFallback className="rounded-lg">
-              <UserIcon className="size-4" />
-            </AvatarFallback>
-          </Avatar>
-          <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">
-              {user.fullName}
-            </span>
-            <span className="truncate text-xs">{user.email}</span>
-          </div>
-        </div>
-      </DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup >
-        {user?.user_metadata?.phone_verified && (
-          <DropdownMenuItem>
-            <BadgeCheck />
-            Verify
-          </DropdownMenuItem>
-        )}
-        <DropdownMenuItem>
-          <UserIcon />
-          Account
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Bell />
-          Notifications
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <LogoutMenu />
-      </DropdownMenuGroup>
-    </DropdownMenuContent>
-  </DropdownMenu>
-  );
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>
+        {/* Use Box to wrap Avatar, no button styling applied */}
+        <Box
+          style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+        >
+          <Avatar
+            size="3"
+            radius="large"
+            fallback={<UserIcon size={16} />}
+            src={user.avatar ?? ''}
+            alt={user.fullName ?? ''}
+          />
+        </Box>
+      </DropdownMenu.Trigger>
+
+      <DropdownMenu.Content align="end" sideOffset={6}>
+        <DropdownMenu.Label>
+          <Flex align="center" gap="3">
+            <Avatar
+              size="2"
+              radius="large"
+              fallback={<UserIcon size={14} />}
+              src={user.avatar ?? ''}
+              alt={user.fullName ?? ''}
+            />
+            <Box>
+              <Text as='p' weight="bold" size="1" truncate>
+                {user.fullName}
+              </Text>
+              <Text color="gray" size="1" truncate>
+                {user.email}
+              </Text>
+            </Box>
+          </Flex>
+        </DropdownMenu.Label>
+
+        <DropdownMenu.Separator />
+
+        <DropdownMenu.Group>
+          {user?.user_metadata?.phone_verified && (
+            <DropdownMenu.Item>
+              <Flex align="center" gap="2">
+                <BadgeCheck size={16} />
+                <Text size="2">Verify</Text>
+              </Flex>
+            </DropdownMenu.Item>
+          )}
+
+          <DropdownMenu.Item asChild>
+            <Link href="/profile" underline="none">
+              <Flex align="center" gap="2">
+                <UserIcon size={16} />
+                <Text size="2">Profile</Text>
+              </Flex>
+            </Link>
+          </DropdownMenu.Item>
+
+          <DropdownMenu.Item>
+            <Flex align="center" gap="2">
+              <Bell size={16} />
+              <Text size="2">Notifications</Text>
+            </Flex>
+          </DropdownMenu.Item>
+
+          <DropdownMenu.Separator />
+          <LogoutMenu />
+        </DropdownMenu.Group>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
+  )
 }
 
-export default NavUser;
+export default NavUser

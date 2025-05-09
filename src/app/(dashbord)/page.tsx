@@ -14,10 +14,13 @@ import Slider from '@/components/common/Slider';
 
     const supabase= await createClient()
 
-    const {data,error} =await supabase.from('Property').select('*')
-
-     console.log(data?.length)
-         
+  const { data, error } = await supabase
+  .from('Property')
+  .select('*')
+  .order('createdAt', { ascending: false }) 
+  .limit(10); 
+   
+  console.log('data',data)
          
 
 
@@ -32,6 +35,28 @@ import Slider from '@/components/common/Slider';
          <Slider/>
            
        </Box>
+          <Flex justify={'center'} direction={'column'} align={'center'}  mb={'4'} mt={'4'}>
+              <Heading as='h2'>NESTIFY - HOUSE RENT SOLUTION</Heading>
+              <Heading mt={'2'} as='h3'>Recent Upload</Heading>
+          </Flex>
+
+          <Grid align={'center'} gap={'4'} columns={{
+            initial:'2',
+            md:'3',
+            lg:'5'
+          }}>
+                 {
+                  data?.map((item)=>{
+                    return <Property item={item}/> 
+                  })
+                 }
+                
+          </Grid>
+
+       <Box>
+        
+          
+          </Box> 
 
        {/* <Grid gapX={'4'} columns={{
         initial:'1',
