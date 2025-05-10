@@ -12,12 +12,15 @@ function layout({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col">
         <Navbar />
          <SubMenu/>
-        <Container className="p-4 lg:p-0">
+        <Container className="p-4 min-h-[calc(100vh-20vh)] lg:p-0">
           <BreadcrumbComponent />
 
           {children}
+
+         
         </Container>
-        <Footer/>
+          <Footer/>
+       
       </div>
     </Box>
   );

@@ -2,9 +2,10 @@
 
 import { useAuth } from '@/hooks/useAuth'
 import React from 'react'
-import { BadgeCheck,  CreditCard, Heart, House, HousePlus, Star, UserIcon ,History, HandCoins } from 'lucide-react'
-import LogoutMenu from './common/LogoutMenu'
+import { BadgeCheck,  CreditCard, Heart, House, HousePlus, Star, UserIcon ,History, HandCoins, LogOut } from 'lucide-react'
+
 import { Avatar, Box, DropdownMenu, Flex, Link, Text } from '@radix-ui/themes'
+import { logoutAction } from '@/action/LoginAction'
 
 
 
@@ -33,7 +34,7 @@ function NavUser() {
         </Box>
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content align="end" sideOffset={6}>
+      <DropdownMenu.Content align="end" className='w-60' sideOffset={6}>
         <DropdownMenu.Label>
           <Flex align="center" gap="3">
             <Avatar
@@ -141,8 +142,12 @@ function NavUser() {
 
           <DropdownMenu.Separator />
 
-          <DropdownMenu.Item>
-              <LogoutMenu />
+          <DropdownMenu.Item onClick={async ()=>{await logoutAction()}}>
+                <Flex align="center" gap="2">
+<             LogOut    size={16} />
+                <Text size="2">Log out</Text>
+              </Flex>
+              
           </DropdownMenu.Item>
           
         </DropdownMenu.Group>

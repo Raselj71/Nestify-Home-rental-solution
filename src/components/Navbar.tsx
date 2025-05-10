@@ -24,7 +24,7 @@ function Navbar() {
 
           <Flex gap={"3"} align={"center"}>
             <div className="hidden lg:flex">
-              <Button asChild variant="soft">
+              <Button asChild size={'3'} variant="soft">
                 <Link
                   underline="none"
                   href="/add-property"

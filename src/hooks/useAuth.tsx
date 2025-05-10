@@ -1,3 +1,4 @@
+
 import { Tables } from "@/utils/Database";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
