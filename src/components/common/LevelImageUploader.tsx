@@ -35,7 +35,7 @@ const MultiImageInput = ({
   previewRatio,
   width = 400,
   height = 400,
-  maxSize = 1,
+  maxSize = 5,
   fileNames = [],
   selectedImages,
   setSelectedImages,
