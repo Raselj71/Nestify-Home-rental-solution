@@ -1,6 +1,6 @@
-import { BreadcrumbComponent } from "@/components/Breadcumb";
+
 import Footer from "@/components/common/Footer";
-import SubSection from "@/components/common/SubSection";
+
 import Navbar from "@/components/Navbar";
 import SubMenu from "@/components/SubMenu";
 import { Box, Container } from "@radix-ui/themes";
@@ -13,9 +13,9 @@ function layout({ children }: { children: React.ReactNode }) {
       <div className="flex flex-col">
         <Navbar />
          <SubMenu/>
-         <SubSection/>
+        
         <Container className="p-4 min-h-[calc(100vh-20vh)] lg:p-0">
-          <BreadcrumbComponent />
+          {/* <BreadcrumbComponent /> */}
 
           {children}
 

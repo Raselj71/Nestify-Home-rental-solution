@@ -21,12 +21,12 @@ export default async function Page({ params, searchParams }: PageProps) {
   const { data, count } = await supabase
     .from('Property')
     .select('*', { count: 'exact' })
-    .eq('propertyDivision', paramsData.id)
+    .eq('propertyCategory', paramsData.id)
     .range(from, to)
 
   return (
-    <Box className=''>
-       <Heading className='first-letter:uppercase' mb={'3'}>{paramsData.id}</Heading>
+    <Box>
+      <Heading className='first-letter:uppercase' mb={'3'}>{paramsData.id}</Heading>
       <PropertyList data={data || []} total={count || 0} page={page} perPage={perPage} />
     </Box>
   )

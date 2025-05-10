@@ -6,6 +6,7 @@ import React from 'react'
 import { createClient } from '@/utils/supabase/ServerClient';
 import Property from '@/components/common/Property';
 import Slider from '@/components/common/Slider';
+import SubSection from '@/components/common/SubSection';
 
 
 
@@ -28,7 +29,7 @@ import Slider from '@/components/common/Slider';
 
   return (
     <div>
-       
+        <SubSection/>
         {/* <Flex justify={'center'} align={'center'}  mb={'4'} mt={'4'}>
                  <Button size={'3'} variant='soft' asChild>
                         <Link underline='none' href={'/dashboard/profile'}>

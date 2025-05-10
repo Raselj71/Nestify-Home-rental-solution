@@ -3,6 +3,8 @@ import { Box, Card, Flex, Grid, Heading, Separator, Text } from "@radix-ui/theme
 import { Bath, Bed, Info, Image, Navigation, NotepadText, Banknote } from "lucide-react";
 import { MdBalcony } from "react-icons/md";
 import parse from 'html-react-parser';
+import { CgGenderMale } from "react-icons/cg";
+
 
 import React from "react";
 
@@ -79,14 +81,33 @@ async function page({ params }: PageProps) {
                   <Bath />
                   <Text>Bathroom : {data.propertyBathroom}</Text>
                 </div>
-                <div className="flex items-center gap-2 font-medium">
+                {
+                    data.propertyBalcony?.length ?? 0 > 0 ? <div className="flex items-center gap-2 font-medium">
                   <MdBalcony />
 
                   <Text>Balcony : {data.propertyBalcony}</Text>
-                </div>
-                <div className="flex align-middle gap-2 font-medium">
+                </div>: null
+                }
+                
+
+                {
+                  data.propertyFloor?.length ?? 0 > 0 ?   <div className="flex align-middle gap-2 font-medium">
                   <Text>Floor : {data.propertyFloor}</Text>
-                </div>
+                </div>:null
+                }
+              
+
+                {data.gender?.length ?? 0 > 0 ? <div className="flex items-center gap-2 font-medium">
+                  <CgGenderMale size={20} />
+
+                  <Text>Gender : {data.gender}</Text>
+                </div>:null}
+
+                  {data.propertySeat?.length ?? 0 > 0 ? <div className="flex items-center gap-2 font-medium">
+                  <CgGenderMale size={20} />
+
+                  <Text>{data.propertyType} : {data.propertySeat}</Text>
+                </div>:null}
               </Grid>
             </Box>
           </Card>

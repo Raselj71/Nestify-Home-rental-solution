@@ -77,7 +77,7 @@ function NavUser() {
           </DropdownMenu.Item>
            
             <DropdownMenu.Item asChild>
-            <Link className=' hover:border-none'  href="/add-property" underline="none">
+            <Link className=' hover:border-none'  href="/order" underline="none">
               <Flex align="center" gap="2">
                 <Star  size={16} />
                 <Text size="2">Order Now</Text>
@@ -86,7 +86,7 @@ function NavUser() {
           </DropdownMenu.Item>
 
           <DropdownMenu.Item asChild>
-            <Link className=' hover:border-none'  href="/add-property" underline="none">
+            <Link className=' hover:border-none'  href="/order-history" underline="none">
               <Flex align="center" gap="2">
                 <History  size={16} />
                 <Text size="2">Order History</Text>
@@ -113,7 +113,7 @@ function NavUser() {
           </DropdownMenu.Item>
 
             <DropdownMenu.Item asChild>
-            <Link  href="/my-property" underline="none">
+            <Link  href="/purchase-history" underline="none">
               <Flex align="center" gap="2">
                 <CreditCard   size={16} />
                 <Text size="2">Purchase History</Text>
@@ -122,7 +122,7 @@ function NavUser() {
           </DropdownMenu.Item>
 
             <DropdownMenu.Item asChild>
-            <Link  href="/my-property" underline="none">
+            <Link  href="/save-property" underline="none">
               <Flex align="center" gap="2">
                 <Heart   size={16} />
                 <Text size="2">Saved Property</Text>
@@ -132,7 +132,7 @@ function NavUser() {
 
 
          <DropdownMenu.Item asChild>
-            <Link  href="/my-property" underline="none">
+            <Link  href="/buy-point" underline="none">
               <Flex align="center" gap="2">
                 <HandCoins    size={16} />
                 <Text size="2">Buy Point</Text>
