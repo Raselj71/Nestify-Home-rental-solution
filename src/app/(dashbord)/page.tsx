@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Heading } from '@radix-ui/themes'
+import { Box, Flex, Grid, Heading} from '@radix-ui/themes'
 
 import React from 'react'
 
@@ -6,6 +6,7 @@ import React from 'react'
 import { createClient } from '@/utils/supabase/ServerClient';
 import Property from '@/components/common/Property';
 import Slider from '@/components/common/Slider';
+
 
 
 
@@ -20,16 +21,22 @@ import Slider from '@/components/common/Slider';
   .order('createdAt', { ascending: false }) 
   .limit(10); 
    
-  console.log('data',data)
+ const {data:familyData}=await supabase.from('Property').select('*').filter('propertyCategory','eq','family').limit(10)
+ const {data:bachelorData}=await supabase.from('Property').select('*').filter('propertyCategory','eq','bachelor').limit(10)
          
 
 
   return (
     <div>
-       {/* <Flex direction={'column'}>
-            <Heading>{t('title')}</Heading>
-            <Text> {t('body')} </Text>
-       </Flex> */}
+       
+        {/* <Flex justify={'center'} align={'center'}  mb={'4'} mt={'4'}>
+                 <Button size={'3'} variant='soft' asChild>
+                        <Link underline='none' href={'/dashboard/profile'}>
+                            <House/>
+                            Family
+                        </Link>
+                 </Button>
+          </Flex> */}
 
        <Box> 
          <Slider/>
@@ -55,23 +62,47 @@ import Slider from '@/components/common/Slider';
                 
           </Grid>
 
-       <Box>
-        
-          
-          </Box> 
+          <Box my={'4'}>
+             <Heading my={'4'} as='h3'>Family</Heading>
 
-       {/* <Grid gapX={'4'} columns={{
-        initial:'1',
-         lg:'3'
-       }} gap={'4'} >
-          {
-            data?.map((item)=>{
-              return <Property key={item.id} category={item.propertyCategory} propertyType={item.propertyType} images={item.propertyImages} title={item.propertyCategory}/>
-            })
-          }
-            
-            
-       </Grid> */}
+             <Grid align={'center'} gap={'4'} columns={{
+            initial:'2',
+            md:'3',
+            sm:'3',
+            xl:'5',
+            lg:'4'
+          }}>
+                 {
+                  familyData?.map((item)=>{
+                    return <Property key={item.id} item={item}/> 
+                  })
+                 }
+                
+          </Grid>
+          </Box>
+          
+            <Box my={'4'}>
+             <Heading my={'4'} as='h3'>Bachelor</Heading>
+
+             <Grid align={'center'} gap={'4'} columns={{
+            initial:'2',
+            md:'3',
+            sm:'3',
+            xl:'5',
+            lg:'4'
+          }}>
+                 {
+                  bachelorData?.map((item)=>{
+                    return <Property key={item.id} item={item}/> 
+                  })
+                 }
+                
+          </Grid>
+          </Box>
+
+      
+
+      
 
     </div>
   )
