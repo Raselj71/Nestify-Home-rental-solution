@@ -17,7 +17,7 @@ function NavUser() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
-        {/* Use Box to wrap Avatar, no button styling applied */}
+       
         <Box
           style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
         >

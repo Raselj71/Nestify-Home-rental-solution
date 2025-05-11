@@ -7,6 +7,31 @@ export type Json =
   | Json[]
 
 export type Database = {
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          operationName?: string
+          query?: string
+          variables?: Json
+          extensions?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       Booking: {
@@ -142,6 +167,42 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "Property_userId_fkey"
+            columns: ["userId"]
+            isOneToOne: false
+            referencedRelation: "Users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      PropertyView: {
+        Row: {
+          created_at: string
+          id: string
+          propertyId: string | null
+          userId: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          propertyId?: string | null
+          userId?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          propertyId?: string | null
+          userId?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "PropertyView_propertyId_fkey"
+            columns: ["propertyId"]
+            isOneToOne: false
+            referencedRelation: "Property"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "PropertyView_userId_fkey"
             columns: ["userId"]
             isOneToOne: false
             referencedRelation: "Users"
@@ -391,6 +452,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {
       PriceType: ["daily", "weekly", "monthly"],
