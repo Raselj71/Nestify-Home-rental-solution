@@ -1,3 +1,4 @@
+
 import { z } from "zod";
 
 export const LoginFormSchema = z.object({
@@ -19,6 +20,7 @@ export const SignupFormSchema = z.object({
     .min(5, { message: "Be at least 5 characters long" })
    
     .trim(),
+  phone: z.string({message:"Enter mobile number"}).min(11).max(11)  
 });
 
 export type TSignupFormSchema = z.infer<typeof SignupFormSchema>;

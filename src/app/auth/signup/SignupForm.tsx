@@ -25,7 +25,8 @@ export function SignupForm() {
          defaultValues: {
          email:'',
          password:'',
-         name:''
+         name:'',
+         phone:''
          
            
            
@@ -70,6 +71,7 @@ export function SignupForm() {
              
              
                 <Levelnput control={control} name="email" placeholder="email" error={errors.email} label="Email" size="3"/>
+                <Levelnput control={control} name="phone" placeholder="phone" error={errors.phone} label="Phone" size="3"/>
               
              
               

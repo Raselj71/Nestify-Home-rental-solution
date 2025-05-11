@@ -29,7 +29,7 @@ export const LoginAction=async({email,password}:{email:string, password:string})
 
 }
 
-export const SignupAction=async({email,password,name}:{email:string,password:string,name:string})=>{
+export const SignupAction=async({email,password,name,phone}:{email:string,password:string,name:string,phone:string})=>{
   const supabase= await createClient()
    
 
@@ -58,6 +58,7 @@ export const SignupAction=async({email,password,name}:{email:string,password:str
      const { error: insertError} = await supabase.from('Users').insert({
        fullName: name,
        email,
+       phone,
        id: supaUser.id,
        role: 'USER',
        createdAt: new Date().toISOString(),
