@@ -1,12 +1,11 @@
 "use client";
 
-import {  Button, Flex, Separator } from "@radix-ui/themes";
+import {  Button, Dialog, Flex, Separator } from "@radix-ui/themes";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
-import { GoSearch } from "react-icons/go";
 
 
 import { SearchSchema, TSearchSchema } from "@/utils/zod/SearchSchema";
@@ -14,9 +13,11 @@ import RadioCard from "../RadioCard";
 import { useEffect, useState } from "react";
 import { getAllDivisions, getDistrictsByDivision, getUpazilasByDistrict } from "@/utils/Address";
 import LevelSelect from "../LevelSelect";
+import { useRouter } from "next/navigation";
 
 export default function OfficePropertyForm() {
 
+    const router= useRouter()
  
 
     const division = getAllDivisions();
@@ -62,8 +63,8 @@ export default function OfficePropertyForm() {
 
   const onSubmit = async (data: TSearchSchema) => {
      try{
-
-       console.log(data)
+        router.push(`/property/${data.propertyDivision}?district=${data.propertyDistrict}&upzila=${data.propertyUpzila}&category=${data.propertyCategory}`);
+      
         
      }catch(e){
          console.log(e)
@@ -118,10 +119,13 @@ export default function OfficePropertyForm() {
          
        </Flex>
        
-       <Flex mt={'4'} justify={'end'}>
-            <Button size={'3'}><GoSearch />
-             Search</Button>
-       </Flex>
+       <div className="mt-4 flex justify-end">
+            <Dialog.Close className="">
+        <Button type="submit" variant="solid">
+          Search
+        </Button>
+      </Dialog.Close>
+       </div>
       
 
     </form>

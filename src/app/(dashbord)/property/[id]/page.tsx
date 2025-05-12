@@ -8,7 +8,7 @@ import { Box, Flex, Heading, Separator } from '@radix-ui/themes'
 
 interface PageProps {
   params: Promise<{ id: string }>
-  searchParams?:Promise < { page?: string ,district?:string , upzila?:string} >
+  searchParams?:Promise < { page?: string ,district?:string , upzila?:string, category?:string} >
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
@@ -32,6 +32,9 @@ if (searchParamsData?.district) {
 }
 if(searchParamsData?.upzila){
  query = query.eq('propertyUpzila', searchParamsData.upzila)
+}
+if(searchParamsData?.category){
+  query = query.eq('propertyCategory', searchParamsData.category)
 }
 
 const { data, count } = await query.range(from, to)

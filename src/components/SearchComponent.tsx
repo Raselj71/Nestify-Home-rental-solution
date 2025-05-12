@@ -1,10 +1,9 @@
-import { Box, Button, Dialog, Flex, Heading, Separator } from '@radix-ui/themes'
+import { Box, Button, Dialog, Flex, Heading } from '@radix-ui/themes'
 
 import React from 'react'
 import { FiX } from 'react-icons/fi'
 import { PiMagnifyingGlass } from 'react-icons/pi'
 
-import SearchForm from './common/Form/SearchForm'
 import Search from './common/Form/Search'
 
 function SearchComponent() {
@@ -35,9 +34,8 @@ function SearchComponent() {
         </Flex>
 
         <Box>
-          <Flex><SearchForm /></Flex>
-          <Separator  size={'4'}/>
-
+         
+          
            <Box>
              <Search/>
               
