@@ -1,17 +1,18 @@
-import { Box, Button, Container, Flex, Link } from "@radix-ui/themes";
-import Image from "next/image";
-import React from "react";
-import nestifyLogo from "../../public/nestify.png";
-import { cn } from "@/utils/cn";
-import { Plus } from "lucide-react";
-import EnController from "./EnController";
-import NavUser from "./NavUser";
+import { Box, Button, Container, Flex } from '@radix-ui/themes';
+import Image from 'next/image';
+import React from 'react';
+import nestifyLogo from '../../public/nestify.png';
+import { cn } from '@/utils/cn';
+import { Plus } from 'lucide-react';
+import EnController from './EnController';
+import NavUser from './NavUser';
+import Link from 'next/link';
 
 function Navbar() {
   return (
     <Box className=" border-b p-2 ">
       <Container>
-        <Flex justify={"between"} align={"center"}>
+        <Flex justify={'between'} align={'center'}>
           <Link href="/">
             <Image
               src={nestifyLogo}
@@ -22,13 +23,12 @@ function Navbar() {
             />
           </Link>
 
-          <Flex gap={"3"} align={"center"}>
+          <Flex gap={'3'} align={'center'}>
             <div className="hidden lg:flex">
               <Button asChild size={'3'} variant="soft">
                 <Link
-                  underline="none"
                   href="/add-property"
-                  className={cn("hover:no-underline no-underline")}
+                  className={cn('hover:no-underline no-underline')}
                 >
                   <Plus /> Add Property
                 </Link>

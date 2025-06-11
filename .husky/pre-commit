@@ -1,0 +1,8 @@
+echo '🏗️👷 Styling, testing and building your project before committing'
+echo 'please be patient, this may take a while...'
+
+
+
+npx lint-staged
+
+echo '🎉 No error found: committing this now.... ✨🚀🏄‍♂️🍻'

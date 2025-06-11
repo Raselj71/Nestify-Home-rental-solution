@@ -10,25 +10,33 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // Extend Next.js and TypeScript configs
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  // Add Prettier support
+  ...compat.extends("plugin:prettier/recommended"),
+
   {
     rules: {
-  "no-unused-vars": "off", // Disable the base rule (handled by TypeScript version)
-  "react-hooks/rules-of-hooks": "off",
-  "@typescript-eslint/no-explicit-any": "off",
-   'react/no-unescaped-entities': 'off',
-      '@next/next/no-page-custom-font': 'off',
-  "@typescript-eslint/no-unused-vars": [
-    "error",
-    {
-      argsIgnorePattern: "^_",
-      varsIgnorePattern: "^_",
-      ignoreRestSiblings: true,
+      // Your custom rules
+      "no-unused-vars": "off",
+      "react-hooks/rules-of-hooks": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "react/no-unescaped-entities": "off",
+      "@next/next/no-page-custom-font": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
+      "react/react-in-jsx-scope": "off",
+      // You can also explicitly enable the Prettier rule:
+      "prettier/prettier": "warn",
     },
-  ],
-  "react/react-in-jsx-scope": "off",
-}
-  }
+  },
 ];
 
 export default eslintConfig;

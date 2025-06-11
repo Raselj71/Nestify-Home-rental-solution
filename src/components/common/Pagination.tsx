@@ -1,18 +1,17 @@
-// components/Pagination.tsx
-'use client'
+'use client';
 
-import { Button, Flex, Text } from '@radix-ui/themes'
-import React from 'react'
+import { Button, Flex, Text } from '@radix-ui/themes';
+import React from 'react';
 
 type Props = {
-  page: number
-  total: number
-  perPage: number
-  onPageChange: (newPage: number) => void
-}
+  page: number;
+  total: number;
+  perPage: number;
+  onPageChange: (newPage: number) => void;
+};
 
 const Pagination = ({ page, total, perPage, onPageChange }: Props) => {
-  const totalPages = Math.ceil(total / perPage)
+  const totalPages = Math.ceil(total / perPage);
 
   return (
     <Flex gap="2" align="center" justify="center" mt="4">
@@ -22,11 +21,14 @@ const Pagination = ({ page, total, perPage, onPageChange }: Props) => {
       <Text size="2">
         Page {page} of {totalPages}
       </Text>
-      <Button disabled={page === totalPages} onClick={() => onPageChange(page + 1)}>
+      <Button
+        disabled={page === totalPages}
+        onClick={() => onPageChange(page + 1)}
+      >
         Next
       </Button>
     </Flex>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;
